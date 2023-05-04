@@ -7,3 +7,14 @@ export const randomArr = () => {
       return num;
     });
 };
+
+export const swap = (array: Array<number>, index: number): void => {
+  const temp = array[index];
+  array[index] = array[index + 1];
+  array[index + 1] = temp;
+};
+
+export const delay = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });

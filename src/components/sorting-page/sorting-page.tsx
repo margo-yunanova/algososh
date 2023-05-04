@@ -7,36 +7,34 @@ import { Direction } from "../../types/direction";
 import { Column } from "../ui/column/column";
 import { Container } from "../content/container";
 import { FC } from "react";
-import { randomArr } from "../../constants/constants";
+import { delay, randomArr, swap } from "../../constants/constants";
 
 const realConsoleLog = console.log;
 
 export const SortingPage: FC = () => {
   const [checkedRadioButton, setCheckedRadioButton] = useState("Выбор");
-  const [isLoader, setLoader] = useState(false);
+  const [isLoader, setLoader] = useState<boolean>();
   const [sortedArray, setSortedArray] = useState(() => randomArr());
+  const [currentIndex, setCurrentIndex] = useState<Number>();
 
-  const bubbleSort = (arr: Array<number>, direction: Direction) => {
-    const array = arr.map((i) => i);
+  const bubbleSort = async (array: Array<number>, direction: Direction) => {
     if (direction === Direction.Ascending) {
       for (let i = array.length - 1; i > 0; i--) {
         for (let j = 0; j < i; j++) {
+          await delay(1000);
           if (array[j] > array[j + 1]) {
-            const temp = array[j];
-            array[j] = array[j + 1];
-            array[j + 1] = temp;
-            console.log(array);
-            setSortedArray(array);
+            swap(array, j);
+            setSortedArray([...array]);
           }
         }
       }
     } else {
       for (let i = array.length - 1; i > 0; i--) {
         for (let j = 0; j < i; j++) {
+          await delay(1000);
           if (array[j] < array[j + 1]) {
-            const temp = array[j];
-            array[j] = array[j + 1];
-            array[j + 1] = temp;
+            swap(array, j);
+            setSortedArray([...array]);
           }
         }
       }
