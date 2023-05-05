@@ -1,6 +1,6 @@
 .menu {
   display: grid;
-  grid-template-columns: 221px 422px 168px;
+  grid-template-columns: repeat(3, minmax(min-content, max-content));
   column-gap: 50px;
   justify-content: center;
   align-items: center;
@@ -9,6 +9,7 @@
 .menuItem {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .menuCheckbox {
   gap: 46px;

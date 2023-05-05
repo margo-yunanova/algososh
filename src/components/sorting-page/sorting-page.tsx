@@ -7,67 +7,111 @@ import { Direction } from "../../types/direction";
 import { Column } from "../ui/column/column";
 import { Container } from "../content/container";
 import { FC } from "react";
-import { delay, randomArr, swap } from "../../constants/constants";
+import {
+  compareArrayItems,
+  delay,
+  isSelectionSort,
+  randomArr,
+  swap,
+} from "../../constants/utils";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
 
-const realConsoleLog = console.log;
-
 export const SortingPage: FC = () => {
-  type TSortingAlgorithm = 'selectionSort' | 'bubbleSort';
+  type TSortingAlgorithm = "selectionSort" | "bubbleSort";
 
-  const [checkedRadioButton, setCheckedRadioButton] = useState<TSortingAlgorithm>('selectionSort');
-  const [isLoader, setLoader] = useState<boolean>();
+  const [checkedRadioButton, setCheckedRadioButton] =
+    useState<TSortingAlgorithm>("selectionSort");
   const [sortedArray, setSortedArray] = useState(() => randomArr());
-  const [activeButton, setActiveButton] = useState<String | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number | undefined>(
-    undefined
-  );
-  const [sortedColumnIndex, setSortedColumnIndex] = useState<number | undefined>(undefined);
-
-
-
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [firstIndex, setFirstIndex] = useState<number | undefined>(undefined);
+  const [secondIndex, setSecondIndex] = useState<number | undefined>(undefined);
+  const [sortedColumnIndex, setSortedColumnIndex] = useState<
+    number | undefined
+  >(undefined);
 
   const bubbleSort = async (array: Array<number>, direction: Direction) => {
-    if (direction === Direction.Ascending) {
-      for (let i = array.length - 1; i > 0; i--) {
-        for (let j = 0; j < i; j++) {
-          setCurrentIndex(j);
-          await delay(DELAY_IN_MS);
-          if (array[j] > array[j + 1]) {
-            swap(array, j);
-            setSortedArray([...array]);
-          }
+    for (let i = array.length - 1; i > 0; i--) {
+      for (let j = 0; j < i; j++) {
+        setFirstIndex(j);
+        setSecondIndex(j + 1);
+        await delay(DELAY_IN_MS);
+        if (compareArrayItems(direction, array, j, j + 1)) {
+          swap(array, j, j + 1);
+          setSortedArray([...array]);
         }
-        setSortedColumnIndex(i);
       }
-    } else {
-      for (let i = array.length - 1; i > 0; i--) {
-        for (let j = 0; j < i; j++) {
-          setCurrentIndex(j);
-          await delay(DELAY_IN_MS);
-          if (array[j] < array[j + 1]) {
-            swap(array, j);
-            setSortedArray([...array]);
-          }
-        }
-        setSortedColumnIndex(i);
-      }
+      setSortedColumnIndex(i);
     }
-    setCurrentIndex(undefined);
+    setFirstIndex(undefined);
+    setSecondIndex(undefined);
     setSortedColumnIndex(0);
     setActiveButton(null);
   };
 
+  const selectionSort = async (array: Array<number>, direction: Direction) => {
+    for (let i = 0; i < array.length - 1; i++) {
+      setFirstIndex(i);
+      let minIndex = i;
+      for (let j = i + 1; j < array.length; j++) {
+        await delay(DELAY_IN_MS);
+        setSecondIndex(j);
+        if (compareArrayItems(direction, array, minIndex, j)) {
+          minIndex = j;
+        }
+      }
+      swap(array, i, minIndex);
+      setSortedArray([...array]);
+      setSortedColumnIndex(i);
+    }
+    setFirstIndex(undefined);
+    setSecondIndex(undefined);
+    setSortedColumnIndex(array.length - 1);
+    setActiveButton(null);
+  };
+
+  // const bubbleSort = async (array: Array<number>, direction: Direction) => {
+  //   if (direction === Direction.Ascending) {
+  //     for (let i = array.length - 1; i > 0; i--) {
+  //       for (let j = 0; j < i; j++) {
+  //         setCurrentIndex(j);
+  //         await delay(DELAY_IN_MS);
+  //         if (array[j] > array[j + 1]) {
+  //           swap(array, j, j + 1);
+  //           setSortedArray([...array]);
+  //         }
+  //       }
+  //       setSortedColumnIndex(i);
+  //     }
+  //   } else {
+  //     for (let i = array.length - 1; i > 0; i--) {
+  //       for (let j = 0; j < i; j++) {
+  //         setCurrentIndex(j);
+  //         await delay(DELAY_IN_MS);
+  //         if (array[j] < array[j + 1]) {
+  //           swap(array, j, j + 1);
+  //           setSortedArray([...array]);
+  //         }
+  //       }
+  //       setSortedColumnIndex(i);
+  //     }
+  //   }
+  //   setCurrentIndex(undefined);
+  //   setSortedColumnIndex(0);
+  //   setActiveButton(null);
+  // };
+
   const sort = (direction: Direction) => {
-    if (checkedRadioButton === 'bubbleSort') {
+    if (checkedRadioButton === "bubbleSort") {
       bubbleSort(sortedArray, direction);
     } else {
+      selectionSort(sortedArray, direction);
     }
   };
 
   const setRadioInputHandler = (buttonName: TSortingAlgorithm) => {
     setActiveButton(null);
+    setSortedColumnIndex(undefined);
     setCheckedRadioButton(buttonName);
   };
 
@@ -78,10 +122,11 @@ export const SortingPage: FC = () => {
   };
 
   const getColumnState = (index: number): ElementStates | undefined => {
-    if (index === currentIndex || index + 1 === currentIndex)
+    if (index === firstIndex || index === secondIndex)
       return ElementStates.Changing;
     if (sortedColumnIndex === undefined) return ElementStates.Default;
-    if (index >= sortedColumnIndex) return ElementStates.Modified;
+    if (isSelectionSort(checkedRadioButton, index, sortedColumnIndex))
+      return ElementStates.Modified;
   };
 
   return (
@@ -93,14 +138,14 @@ export const SortingPage: FC = () => {
               label="Выбор"
               name="sortOption"
               value="Выбор"
-              onClick={() => setRadioInputHandler('selectionSort')}
+              onClick={() => setRadioInputHandler("selectionSort")}
               defaultChecked
             />
             <RadioInput
               label="Пузырёк"
               name="sortOption"
               value="Пузырёк"
-              onClick={() => setRadioInputHandler('bubbleSort')}
+              onClick={() => setRadioInputHandler("bubbleSort")}
             />
           </div>
           <div className={`${styles.menuItem} ${styles.menuSort}`}>
@@ -109,6 +154,7 @@ export const SortingPage: FC = () => {
               sorting={Direction.Ascending}
               type="button"
               isLoader={activeButton === Direction.Ascending}
+              disabled={activeButton !== null}
               onClick={() => setDirectionHandler(Direction.Ascending)}
             />
             <Button
@@ -116,16 +162,13 @@ export const SortingPage: FC = () => {
               sorting={Direction.Descending}
               type="button"
               isLoader={activeButton === Direction.Descending}
-              disabled={
-                activeButton === null
-                  ? false
-                  : activeButton !== Direction.Descending
-              } //TODO
+              disabled={activeButton !== null}
               onClick={() => setDirectionHandler(Direction.Descending)}
             />
           </div>
           <Button
             text="Новый массив"
+            disabled={activeButton !== null}
             onClick={() => {
               setSortedColumnIndex(undefined);
               setSortedArray(randomArr());
