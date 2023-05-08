@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  max-width: 567px;
+  margin: auto;
+  gap: 12px;
+  padding-bottom: 120px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+}
