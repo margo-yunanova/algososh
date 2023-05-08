@@ -16,28 +16,13 @@ export const StringComponent: React.FC = () => {
   );
   const [firstIndex, setFirstIndex] = useState<number | undefined>(undefined);
   const [secondIndex, setSecondIndex] = useState<number | undefined>(undefined);
-  const [sortedColumnIndexLeft, setSortedColumnIndexLeft] = useState<
-    number | undefined
-  >(undefined);
-  const [sortedColumnIndexRight, setSortedColumnIndexRight] = useState<
-    number | undefined
-  >(undefined);
+  const [hasStartedReverseInput, setStartReverseInput] = useState(false);
 
   const reverseInput = async (input: string) => {
     const array = input.split("");
-
     let lastIndex = array.length - 1;
+    setStartReverseInput(true);
     for (let i = 0; i < array.length / 2; i++) {
-      console.log(
-        "итерация ",
-        i,
-        "i",
-        i,
-        " lastIndex ",
-        lastIndex,
-        array[i],
-        array[lastIndex]
-      );
       setFirstIndex(i);
       setSecondIndex(lastIndex);
       swap(array, i, lastIndex);
@@ -45,12 +30,7 @@ export const StringComponent: React.FC = () => {
       await delay(DELAY_IN_MS);
       lastIndex--;
     }
-
-    // setSortedColumnIndexLeft(Math.floor(array.length / 2) - 1);
-
-    // if (array.length % 2 === 0) {
-    //   setSortedColumnIndexRight(array.length / 2);
-    // }
+    setStartReverseInput(false);
   };
 
   const getCircleState = (
@@ -60,19 +40,16 @@ export const StringComponent: React.FC = () => {
   ): ElementStates | undefined => {
     if (firstIndex === undefined || secondIndex === undefined)
       return ElementStates.Default;
+    if (hasStartedReverseInput) {
+      if (index === firstIndex || index === secondIndex)
+        return ElementStates.Changing;
 
-    if (index === firstIndex || index === secondIndex)
-      return ElementStates.Changing;
-
-    if (index < firstIndex || index > secondIndex)
-      return ElementStates.Modified;
-
-    // if (
-    //   (sortedColumnIndexLeft as number) >= index ||
-    //   (sortedColumnIndexRight as number) <= index
-    // ) {
-    //   return ElementStates.Modified;
-    // }
+      if (index < firstIndex || index > secondIndex)
+        return ElementStates.Modified;
+    } else {
+      if (index <= firstIndex || index >= secondIndex)
+        return ElementStates.Modified;
+    }
   };
 
   const submitHandler: FormEventHandler = async (e) => {
