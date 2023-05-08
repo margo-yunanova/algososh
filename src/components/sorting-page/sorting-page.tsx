@@ -10,7 +10,6 @@ import { FC } from "react";
 import {
   compareArrayItems,
   delay,
-  isSelectionSort,
   randomArr,
   swap,
 } from "../../constants/utils";
@@ -125,8 +124,13 @@ export const SortingPage: FC = () => {
     if (index === firstIndex || index === secondIndex)
       return ElementStates.Changing;
     if (sortedColumnIndex === undefined) return ElementStates.Default;
-    if (isSelectionSort(checkedRadioButton, index, sortedColumnIndex))
-      return ElementStates.Modified;
+
+    const isSortedElement =
+      checkedRadioButton === "selectionSort"
+        ? index <= sortedColumnIndex
+        : index >= sortedColumnIndex;
+
+    if (isSortedElement) return ElementStates.Modified;
   };
 
   return (

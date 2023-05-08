@@ -11,7 +11,7 @@ export const randomArr = () => {
 };
 
 export const swap = (
-  array: Array<number>,
+  array: Array<number | string>,
   firstIndex: number,
   secondIndex: number
 ) => {
@@ -34,12 +34,3 @@ export const compareArrayItems = (
   direction === Direction.Ascending
     ? array[firstIndex] > array[secondIndex]
     : array[firstIndex] < array[secondIndex];
-
-export const isSelectionSort = (
-  radioButton: "selectionSort" | "bubbleSort",
-  index: number,
-  sortedColumnIndex: number
-) =>
-  radioButton === "selectionSort"
-    ? index <= sortedColumnIndex
-    : index >= sortedColumnIndex;
