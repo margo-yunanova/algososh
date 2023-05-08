@@ -8,12 +8,11 @@ import { Circle } from "../ui/circle/circle";
 import { delay, swap } from "../../constants/utils";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
-//TODO верстка
+//TODO верстка - не вмещается по ширине экрана
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [splitInputValue, setSplitInputValue] = useState<Array<string> | null>(
-    null
-  );
+  const [inputValueAsArray, setInputValueAsArray] =
+    useState<Array<string> | null>(null);
   const [firstIndex, setFirstIndex] = useState<number | undefined>(undefined);
   const [secondIndex, setSecondIndex] = useState<number | undefined>(undefined);
   const [hasStartedReverseInput, setStartReverseInput] = useState(false);
@@ -26,7 +25,7 @@ export const StringComponent: React.FC = () => {
       setFirstIndex(i);
       setSecondIndex(lastIndex);
       swap(array, i, lastIndex);
-      setSplitInputValue([...array]);
+      setInputValueAsArray([...array]);
       await delay(DELAY_IN_MS);
       lastIndex--;
     }
@@ -56,7 +55,7 @@ export const StringComponent: React.FC = () => {
     e.preventDefault();
     setFirstIndex(undefined);
     setSecondIndex(undefined);
-    setSplitInputValue((inputValue as string).split(""));
+    setInputValueAsArray((inputValue as string).split(""));
     await delay(DELAY_IN_MS);
     reverseInput(inputValue);
   };
@@ -74,11 +73,15 @@ export const StringComponent: React.FC = () => {
               setInputValue(e.target.value)
             }
           />
-          <Button text="Развернуть" type="submit" />
+          <Button
+            text="Развернуть"
+            type="submit"
+            isLoader={hasStartedReverseInput}
+          />
         </form>
         <div className={styles.circle}>
-          {splitInputValue &&
-            splitInputValue.map((letter, index) => (
+          {inputValueAsArray &&
+            inputValueAsArray.map((letter, index) => (
               <Circle
                 letter={letter}
                 key={index}
