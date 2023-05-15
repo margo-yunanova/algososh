@@ -52,12 +52,17 @@ export const FibonacciPage: React.FC = () => {
               setInputValue(e.target.valueAsNumber)
             }
           />
-          <Button text="Развернуть" type="submit" isLoader={isLoader} />
+          <Button
+            text="Развернуть"
+            type="submit"
+            isLoader={isLoader}
+            // TODO кнопка блокируется если число больше 19
+          />
         </form>
         <div className={styles.circle}>
           {inputValueAsArray &&
             inputValueAsArray.map((value, index) => (
-              <Circle letter={value.toString()} key={index} index={index} />
+              <Circle letter={value.toString()} key={index} index={index} /> //TODO второй ряд начинается слева, а не по центру
             ))}
         </div>
       </Container>
