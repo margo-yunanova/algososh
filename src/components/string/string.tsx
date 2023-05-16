@@ -11,7 +11,7 @@ import { DELAY_IN_MS } from "../../constants/delays";
 //TODO верстка - не вмещается по ширине экрана
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [inputValueAsArray, setInputValueAsArray] =
+  const [dataForVisualization, setDataForVisualization] =
     useState<Array<string> | null>(null);
   const [firstIndex, setFirstIndex] = useState<number | undefined>(undefined);
   const [secondIndex, setSecondIndex] = useState<number | undefined>(undefined);
@@ -25,7 +25,7 @@ export const StringComponent: React.FC = () => {
       setFirstIndex(i);
       setSecondIndex(lastIndex);
       swap(array, i, lastIndex);
-      setInputValueAsArray([...array]);
+      setDataForVisualization([...array]);
       await delay(DELAY_IN_MS);
       lastIndex--;
     }
@@ -55,7 +55,7 @@ export const StringComponent: React.FC = () => {
     e.preventDefault();
     setFirstIndex(undefined);
     setSecondIndex(undefined);
-    setInputValueAsArray((inputValue as string).split(""));
+    setDataForVisualization((inputValue as string).split(""));
     await delay(DELAY_IN_MS);
     reverseInput(inputValue);
   };
@@ -80,8 +80,8 @@ export const StringComponent: React.FC = () => {
           />
         </form>
         <div className={styles.circle}>
-          {inputValueAsArray &&
-            inputValueAsArray.map((letter, index) => (
+          {dataForVisualization &&
+            dataForVisualization.map((letter, index) => (
               <Circle
                 letter={letter}
                 key={index}

@@ -1,10 +1,11 @@
 interface IStack<T> {
-  peek: () => number;
+  peek: () => T | undefined;
   push: (item: T) => number;
   pop: () => T | undefined;
   clear: () => void;
   getElements: () => Array<T>;
   getSize: () => number;
+  [Symbol.iterator]: () => Iterator<T>;
 }
 
 export default class Stack<T> implements IStack<T> {
@@ -33,10 +34,12 @@ export default class Stack<T> implements IStack<T> {
   }
 
   getElements() {
+    //TODO нужно сделать геттер
     return this.container;
   }
 
   getSize() {
+    //TODO нужно сделать геттер
     return this.container.length;
   }
 }

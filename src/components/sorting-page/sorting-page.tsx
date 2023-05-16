@@ -69,37 +69,6 @@ export const SortingPage: FC = () => {
     setActiveButton(null);
   };
 
-  // const bubbleSort = async (array: Array<number>, direction: Direction) => {
-  //   if (direction === Direction.Ascending) {
-  //     for (let i = array.length - 1; i > 0; i--) {
-  //       for (let j = 0; j < i; j++) {
-  //         setCurrentIndex(j);
-  //         await delay(DELAY_IN_MS);
-  //         if (array[j] > array[j + 1]) {
-  //           swap(array, j, j + 1);
-  //           setSortedArray([...array]);
-  //         }
-  //       }
-  //       setSortedColumnIndex(i);
-  //     }
-  //   } else {
-  //     for (let i = array.length - 1; i > 0; i--) {
-  //       for (let j = 0; j < i; j++) {
-  //         setCurrentIndex(j);
-  //         await delay(DELAY_IN_MS);
-  //         if (array[j] < array[j + 1]) {
-  //           swap(array, j, j + 1);
-  //           setSortedArray([...array]);
-  //         }
-  //       }
-  //       setSortedColumnIndex(i);
-  //     }
-  //   }
-  //   setCurrentIndex(undefined);
-  //   setSortedColumnIndex(0);
-  //   setActiveButton(null);
-  // };
-
   const sort = (direction: Direction) => {
     if (checkedRadioButton === "bubbleSort") {
       bubbleSort(sortedArray, direction);

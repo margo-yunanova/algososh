@@ -10,7 +10,9 @@ import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 //TODO адаптивная верстка
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(); //TODO неконтролируемый\контролируемый инпут
-  const [inputValueAsArray, setInputValueAsArray] = useState<Array<number>>([]);
+  const [dataForVisualization, setDataForVisualization] = useState<
+    Array<number>
+  >([]);
   const [isLoader, setLoader] = useState<boolean>(false);
 
   const getFibonacciSequence = (number: number): Array<number> => {
@@ -29,10 +31,10 @@ export const FibonacciPage: React.FC = () => {
   const submitHandler: FormEventHandler = async (e) => {
     e.preventDefault();
     setLoader(true);
-    setInputValueAsArray([]);
+    setDataForVisualization([]);
     const array = getFibonacciSequence(inputValue as number);
     for (const value of array) {
-      setInputValueAsArray((state) => [...state, value]);
+      setDataForVisualization((state) => [...state, value]);
       await delay(SHORT_DELAY_IN_MS);
     }
     setLoader(false);
@@ -60,8 +62,8 @@ export const FibonacciPage: React.FC = () => {
           />
         </form>
         <div className={styles.circle}>
-          {inputValueAsArray &&
-            inputValueAsArray.map((value, index) => (
+          {dataForVisualization &&
+            dataForVisualization.map((value, index) => (
               <Circle letter={value.toString()} key={index} index={index} /> //TODO второй ряд начинается слева, а не по центру
             ))}
         </div>
