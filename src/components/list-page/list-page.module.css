@@ -1,0 +1,28 @@
+/* TODO поправить расстояние между формами */
+
+.form {
+  display: flex;
+  max-width: 952px;
+  margin: auto;
+  gap: 12px;
+  padding-bottom: 48px;
+}
+
+.circle {
+  display: flex;
+  max-width: 944px;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  row-gap: 48px;
+}
+
+.circleBlock {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 204px;
+}

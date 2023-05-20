@@ -21,7 +21,7 @@ export const SortingPage: FC = () => {
 
   const [checkedRadioButton, setCheckedRadioButton] =
     useState<TSortingAlgorithm>("selectionSort");
-  const [sortedArray, setSortedArray] = useState(() => randomArr());
+  const [sortedArray, setSortedArray] = useState(() => randomArr(3, 17, 100));
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const [firstIndex, setFirstIndex] = useState<number | undefined>(undefined);
   const [secondIndex, setSecondIndex] = useState<number | undefined>(undefined);
@@ -144,7 +144,7 @@ export const SortingPage: FC = () => {
             disabled={activeButton !== null}
             onClick={() => {
               setSortedColumnIndex(undefined);
-              setSortedArray(randomArr());
+              setSortedArray(randomArr(3, 17, 100));
             }}
           />
         </nav>

@@ -1,11 +1,11 @@
 import { Direction } from "../types/direction";
 
-export const randomArr = () => {
-  const randomNumber = Math.floor(Math.random() * 15 + 3);
+export const randomArr = (min: number, max: number, maxNumber: number) => {
+  const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
   return Array(randomNumber)
     .fill(0)
     .map(() => {
-      const num = Math.floor(Math.random() * 101);
+      const num = Math.floor(Math.random() * (maxNumber + 1));
       return num;
     });
 };

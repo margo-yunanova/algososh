@@ -30,7 +30,7 @@ export const QueuePage: React.FC = () => {
       setModifiedItem(null);
     }
   };
-  console.log(queue.length);
+
   return (
     <SolutionLayout title="Очередь">
       <Container padding={"queuePage"}>
