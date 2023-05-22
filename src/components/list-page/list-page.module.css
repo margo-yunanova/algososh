@@ -1,4 +1,7 @@
 /* TODO поправить расстояние между формами */
+.forms {
+  padding-bottom: 150px;
+}
 
 .form {
   display: flex;
@@ -13,8 +16,6 @@
   margin: auto;
   justify-content: center;
   gap: 25px;
-  padding-top: 56px;
-  /* row-gap: 48px; */
 }
 
 .circleBlock {

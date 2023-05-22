@@ -74,18 +74,24 @@ export class LinkedList<T> implements TLinkedList<T> {
     } else if (this.head === null || index === 0) {
       this.prepend(value);
     } else {
-      for (
-        let previous = this.head, next = previous.next;
-        index > 0 && next !== null;
-        index--, previous = next, next = previous.next
-      ) {
-        if (next.next === null) {
-          next.next = new LinkedListNode(value);
-          break;
-        } else if (index - 1 === 0) {
-          previous.next = new LinkedListNode(value, next);
-        }
+      // for (
+      //   let previous = this.head, next = previous.next;
+      //   index > 0 && next !== null;
+      //   index--, previous = next, next = previous.next
+      // ) {
+      //   if (next.next === null) {
+      //     next.next = new LinkedListNode(value);
+      //     break;
+      //   } else if (index - 1 === 0) {
+      //     previous.next = new LinkedListNode(value, next);
+      //   }
+      // }
+      let previous = this.head;
+      while (index - 1 > 0 && previous.next !== null) {
+        previous = previous.next;
+        index--;
       }
+      previous.next = new LinkedListNode(value, previous.next);
     }
     this.size++;
   }
