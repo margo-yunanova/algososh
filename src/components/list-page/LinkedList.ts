@@ -12,11 +12,10 @@ interface TLinkedList<T> {
   prepend(value: T): void;
   append(value: T): void;
   addByIndex(value: T, index: number): void;
-  //TODO нужно ли возвращать элементы?
   deleteByIndex(index: number): void;
   deleteHead(): void;
   deleteTail(): void;
-  //toArray(): Array<T>;
+  toArray(): Array<T>;
 }
 
 export class LinkedList<T> implements TLinkedList<T> {
@@ -70,7 +69,7 @@ export class LinkedList<T> implements TLinkedList<T> {
   }
 
   addByIndex(value: T, index: number) {
-    if (index < 0 || index > this.size) {
+    if (index < 0 || index > this.size + 1) {
       throw new Error("Хрен тебе");
     } else if (this.head === null || index === 0) {
       this.prepend(value);
@@ -80,9 +79,11 @@ export class LinkedList<T> implements TLinkedList<T> {
         index > 0 && next !== null;
         index--, previous = next, next = previous.next
       ) {
-        if (index - 1 === 0) {
-          const node = new LinkedListNode(value, next);
-          previous.next = node;
+        if (next.next === null) {
+          next.next = new LinkedListNode(value);
+          break;
+        } else if (index - 1 === 0) {
+          previous.next = new LinkedListNode(value, next);
         }
       }
     }
@@ -101,7 +102,7 @@ export class LinkedList<T> implements TLinkedList<T> {
         index--, previous = next, next = previous.next
       ) {
         if (index - 1 === 0) {
-          previous.next = next.next ?? null;
+          previous.next = next.next;
         }
       }
     }
@@ -111,10 +112,8 @@ export class LinkedList<T> implements TLinkedList<T> {
   deleteHead() {
     if (this.head === null) {
       throw new Error("Список и так пустой");
-    } else {
-      const newHead = this.head.next;
-      this.head = newHead;
     }
+    this.head = this.head.next;
     this.size--;
   }
 
@@ -124,19 +123,16 @@ export class LinkedList<T> implements TLinkedList<T> {
     } else if (this.head.next === null) {
       this.head = null;
     } else {
-      for (
-        let current = this.head;
-        current.next !== null;
-        current = current.next
-      ) {
-        if (current.next.next === null) {
-          current.next = null;
-          break;
-        }
+      let current = this.head;
+      while (current.next !== null && current.next.next !== null) {
+        current = current.next;
       }
+      current.next = null;
     }
     this.size--;
   }
 
-  //toArray() {}
+  toArray() {
+    return [...this];
+  }
 }
