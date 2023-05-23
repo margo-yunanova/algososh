@@ -25,14 +25,16 @@ export const ListPage: React.FC = () => {
   >([...linkedList]);
   const [modifiedItem, setModifiedItem] = useState<number | null>(null);
   const [head, setHead] = useState<"head" | React.ReactElement | null>("head");
-  const [tail, setTail] = useState<"tail" | React.ReactElement | null>("tail"); //ПЕРЕИМЕНОВАТЬ
-  const [insertItem, setInsertItem] = useState<number | null>(null);
+  const [tail, setTail] = useState<React.ReactElement | null>(null);
+  const [insertItem, setInsertItem] = useState<number | null>(0); //переименовать?
+  const [deletedItem, setDeletedItem] = useState<number | null>(null);
   const lastIndexDataForVisualization = dataForVisualization.length - 1;
 
   const submitPrepend: FormEventHandler = async (e) => {
     e.preventDefault();
     if (inputValue !== "") {
       linkedList.prepend(inputValue);
+      setInsertItem(0);
       setHead(
         <Circle
           isSmall={true}
@@ -54,7 +56,7 @@ export const ListPage: React.FC = () => {
     e.preventDefault();
     if (inputValue !== "" && inputIndex !== -1) {
       linkedList.addByIndex(inputValue, inputIndex);
-      setTail(
+      setHead(
         <Circle
           isSmall={true}
           letter={inputValue}
@@ -66,8 +68,8 @@ export const ListPage: React.FC = () => {
         setInsertItem(i);
         await delay(SHORT_DELAY_IN_MS);
       }
-      setInsertItem(null);
-      setTail(null);
+
+      setHead(null);
       setDataForVisualization([...linkedList]);
       setModifiedItem(inputIndex);
       await delay(SHORT_DELAY_IN_MS);
@@ -78,7 +80,10 @@ export const ListPage: React.FC = () => {
   };
 
   const getState = (index: number) => {
-    if (insertItem !== null && index < insertItem && inputIndex > -1) {
+    if (
+      (insertItem !== null && index < insertItem && inputIndex > -1) ||
+      (deletedItem !== null && index <= deletedItem)
+    ) {
       return ElementStates.Changing;
     } else if (index === modifiedItem) {
       return ElementStates.Modified;
@@ -117,18 +122,18 @@ export const ListPage: React.FC = () => {
               onClick={async () => {
                 linkedList.append(inputValue);
                 setInsertItem(lastIndexDataForVisualization);
-                setTail(
+                setHead(
                   <Circle
                     isSmall={true}
                     letter={inputValue}
                     state={ElementStates.Changing}
                   />
                 );
-                await delay(2000);
-                setTail(null);
+                await delay(SHORT_DELAY_IN_MS);
+                setHead(null);
                 setDataForVisualization([...linkedList]);
                 setModifiedItem(lastIndexDataForVisualization + 1);
-                await delay(2000);
+                await delay(SHORT_DELAY_IN_MS);
                 setModifiedItem(null);
                 setInsertItem(null);
                 setInputValue("");
@@ -139,7 +144,20 @@ export const ListPage: React.FC = () => {
               type="button"
               //disabled={queue.isEmpty()}
               linkedList="small"
-              onClick={() => {
+              onClick={async () => {
+                setDeletedItem(0);
+                setDataForVisualization(["", ...[...linkedList].slice(1)]);
+                await delay(2000);
+                setTail(
+                  <Circle
+                    isSmall={true}
+                    letter={[...linkedList][0]}
+                    state={ElementStates.Changing}
+                  />
+                );
+                await delay(2000);
+                setDeletedItem(null);
+                setTail(null);
                 linkedList.deleteHead();
                 setDataForVisualization([...linkedList]);
               }}
@@ -149,7 +167,19 @@ export const ListPage: React.FC = () => {
               type="button"
               //disabled={queue.isEmpty()}
               linkedList="small"
-              onClick={() => {
+              onClick={async () => {
+                setDeletedItem([...linkedList].length - 1);
+                setDataForVisualization([...[...linkedList].slice(0, -1), ""]);
+                setTail(
+                  <Circle
+                    isSmall={true}
+                    letter={[...linkedList].at(-1)}
+                    state={ElementStates.Changing}
+                  />
+                );
+                await delay(SHORT_DELAY_IN_MS);
+                setDeletedItem(null);
+                setTail(null);
                 linkedList.deleteTail();
                 setDataForVisualization([...linkedList]);
               }}
@@ -177,9 +207,30 @@ export const ListPage: React.FC = () => {
               type="button"
               disabled={inputIndex === -1}
               linkedList="big"
-              onClick={() => {
+              onClick={async () => {
+                const letter = dataForVisualization[inputIndex];
+                for (let i = 0; i <= inputIndex; i++) {
+                  setDeletedItem(i);
+                  await delay(SHORT_DELAY_IN_MS);
+                }
+                setDataForVisualization(
+                  dataForVisualization.map((i, index) =>
+                    inputIndex === index ? "" : i
+                  )
+                );
+                setDeletedItem(null);
+                setTail(
+                  <Circle
+                    isSmall={true}
+                    letter={letter}
+                    state={ElementStates.Changing}
+                  />
+                );
+                await delay(SHORT_DELAY_IN_MS);
+                setTail(null);
                 linkedList.deleteByIndex(inputIndex);
                 setDataForVisualization([...linkedList]);
+                setInputIndex(-1);
               }}
             />
           </form>
@@ -190,8 +241,14 @@ export const ListPage: React.FC = () => {
               <Circle
                 letter={value.toString()}
                 index={index}
-                head={index === insertItem ? tail : index === 0 ? head : null}
-                //tail={index === lastIndexDataForVisualization ? tail : null}
+                head={index === insertItem ? head : index === 0 ? "head" : null}
+                tail={
+                  index === inputIndex || index === deletedItem
+                    ? tail
+                    : index === lastIndexDataForVisualization
+                    ? "tail"
+                    : null
+                }
                 state={getState(index)}
               />
               {lastIndexDataForVisualization !== index && <ArrowIcon />}

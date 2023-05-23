@@ -102,15 +102,27 @@ export class LinkedList<T> implements TLinkedList<T> {
     } else if (this.head === null || index === 0) {
       this.deleteHead();
     } else {
-      for (
-        let previous = this.head, next = previous.next;
-        index > 0 && next !== null;
-        index--, previous = next, next = previous.next
+      // for (
+      //   let previous = this.head, next = previous.next;
+      //   index > 0 && next !== null;
+      //   index--, previous = next, next = previous.next
+      // ) {
+      //   if (index - 1 === 0) {
+      //     previous.next = next.next;
+      //   }
+      // }
+
+      let previous = this.head;
+
+      while (
+        index - 1 !== 0 &&
+        previous.next !== null &&
+        previous.next.next !== null
       ) {
-        if (index - 1 === 0) {
-          previous.next = next.next;
-        }
+        previous = previous.next;
       }
+
+      previous.next = previous.next!.next;
     }
     this.size--;
   }
