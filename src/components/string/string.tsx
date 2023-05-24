@@ -20,7 +20,6 @@ export const StringComponent: React.FC = () => {
   const reverseInput = async (input: string) => {
     const array = input.split("");
     let lastIndex = array.length - 1;
-    setStartReverseInput(true);
     for (let i = 0; i < array.length / 2; i++) {
       setFirstIndex(i);
       setSecondIndex(lastIndex);
@@ -29,7 +28,6 @@ export const StringComponent: React.FC = () => {
       await delay(DELAY_IN_MS);
       lastIndex--;
     }
-    setStartReverseInput(false);
   };
 
   const getCircleState = (
@@ -56,8 +54,10 @@ export const StringComponent: React.FC = () => {
     setFirstIndex(undefined);
     setSecondIndex(undefined);
     setDataForVisualization((inputValue as string).split(""));
+    setStartReverseInput(true);
     await delay(DELAY_IN_MS);
-    reverseInput(inputValue);
+    await reverseInput(inputValue);
+    setStartReverseInput(false);
   };
 
   return (
