@@ -225,7 +225,7 @@ export const ListPage: React.FC = () => {
               text="Добавить по индексу"
               type="submit"
               disabled={
-                inputIndex === -1 ||
+                inputIndex <= -1 ||
                 inputValue === "" ||
                 currentAnimation !== null ||
                 inputIndex > dataForVisualization.length
@@ -237,7 +237,7 @@ export const ListPage: React.FC = () => {
               text="Удалить по индексу"
               type="button"
               disabled={
-                inputIndex === -1 ||
+                inputIndex <= -1 ||
                 currentAnimation !== null ||
                 inputIndex > dataForVisualization.length - 1
               }
