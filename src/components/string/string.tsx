@@ -8,7 +8,7 @@ import { Circle } from "../ui/circle/circle";
 import { delay, swap } from "../../constants/utils";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
-//TODO верстка - не вмещается по ширине экрана
+
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [dataForVisualization, setDataForVisualization] =

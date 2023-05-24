@@ -32,12 +32,6 @@ export class LinkedList<T> implements TLinkedList<T> {
   }
 
   *[Symbol.iterator]() {
-    // let current = this.head;
-    // while (current !== null) {
-    //   yield current.value;
-    //   current = current.next;
-    // }
-
     for (let current = this.head; current !== null; current = current.next) {
       yield current.value;
     }
@@ -74,18 +68,6 @@ export class LinkedList<T> implements TLinkedList<T> {
     } else if (this.head === null || index === 0) {
       this.prepend(value);
     } else {
-      // for (
-      //   let previous = this.head, next = previous.next;
-      //   index > 0 && next !== null;
-      //   index--, previous = next, next = previous.next
-      // ) {
-      //   if (next.next === null) {
-      //     next.next = new LinkedListNode(value);
-      //     break;
-      //   } else if (index - 1 === 0) {
-      //     previous.next = new LinkedListNode(value, next);
-      //   }
-      // }
       let previous = this.head;
       while (index - 1 > 0 && previous.next !== null) {
         previous = previous.next;
@@ -102,18 +84,7 @@ export class LinkedList<T> implements TLinkedList<T> {
     } else if (this.head === null || index === 0) {
       this.deleteHead();
     } else {
-      // for (
-      //   let previous = this.head, next = previous.next;
-      //   index > 0 && next !== null;
-      //   index--, previous = next, next = previous.next
-      // ) {
-      //   if (index - 1 === 0) {
-      //     previous.next = next.next;
-      //   }
-      // }
-
       let previous = this.head;
-
       while (
         index - 1 !== 0 &&
         previous.next !== null &&
@@ -121,7 +92,6 @@ export class LinkedList<T> implements TLinkedList<T> {
       ) {
         previous = previous.next;
       }
-
       previous.next = previous.next!.next;
     }
     this.size--;

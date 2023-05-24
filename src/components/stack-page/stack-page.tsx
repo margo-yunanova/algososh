@@ -9,7 +9,6 @@ import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import Stack from "./Stack";
 import { ElementStates } from "../../types/element-states";
-//TODO адаптивная верстка
 
 export const StackPage: React.FC = () => {
   const [stack] = useState(() => new Stack<string>());

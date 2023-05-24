@@ -7,9 +7,9 @@ import styles from "./fibonacci-page.module.css";
 import { Circle } from "../ui/circle/circle";
 import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-//TODO адаптивная верстка
+
 export const FibonacciPage: React.FC = () => {
-  const [inputValue, setInputValue] = useState<number>(); //TODO неконтролируемый\контролируемый инпут
+  const [inputValue, setInputValue] = useState<number>();
   const [dataForVisualization, setDataForVisualization] = useState<
     Array<number>
   >([]);
@@ -58,13 +58,13 @@ export const FibonacciPage: React.FC = () => {
             text="Развернуть"
             type="submit"
             isLoader={isLoader}
-            // TODO кнопка блокируется если число больше 19
+            disabled={(inputValue as number) > 19}
           />
         </form>
         <div className={styles.circle}>
           {dataForVisualization &&
             dataForVisualization.map((value, index) => (
-              <Circle letter={value.toString()} key={index} index={index} /> //TODO второй ряд начинается слева, а не по центру
+              <Circle letter={value.toString()} key={index} index={index} />
             ))}
         </div>
       </Container>

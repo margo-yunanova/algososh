@@ -34,12 +34,10 @@ export default class Stack<T> implements IStack<T> {
   }
 
   getElements() {
-    //TODO нужно сделать геттер
     return this.container;
   }
 
   getSize() {
-    //TODO нужно сделать геттер
     return this.container.length;
   }
 }

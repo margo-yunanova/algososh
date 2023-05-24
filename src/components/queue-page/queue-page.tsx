@@ -9,7 +9,6 @@ import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import Queue from "./Queue";
 import { ElementStates } from "../../types/element-states";
-//TODO адаптивная верстка
 
 export const QueuePage: React.FC = () => {
   const [queue] = useState(() => new Queue<string>(7));
