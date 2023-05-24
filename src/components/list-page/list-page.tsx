@@ -29,7 +29,7 @@ export const ListPage: React.FC = () => {
   const [insertItem, setInsertItem] = useState<number | null>(0);
   const [deletedItem, setDeletedItem] = useState<number | null>(null);
   const [deleteByIndex, setDeleteByIndex] = useState<boolean>(false);
-  const [currentAnimationProcess, setCurrentAnimationProcess] = useState<
+  const [currentAnimation, setCurrentAnimation] = useState<
     | "prepend"
     | "append"
     | "addByIndex"
@@ -42,55 +42,53 @@ export const ListPage: React.FC = () => {
 
   const submitPrepend: FormEventHandler = async (e) => {
     e.preventDefault();
-    if (inputValue !== "") {
-      setCurrentAnimationProcess("prepend");
-      linkedList.prepend(inputValue);
-      setInsertItem(0);
-      setHead(
-        <Circle
-          isSmall={true}
-          letter={inputValue}
-          state={ElementStates.Changing}
-        />
-      );
-      await delay(SHORT_DELAY_IN_MS);
-      setDataForVisualization([...linkedList]);
-      setModifiedItem(0);
-      setHead("head");
-      await delay(SHORT_DELAY_IN_MS);
-      setModifiedItem(null);
-      setInputValue("");
-      setCurrentAnimationProcess(null);
-    }
+    if (inputValue === "") return;
+    setCurrentAnimation("prepend");
+    linkedList.prepend(inputValue);
+    setInsertItem(0);
+    setHead(
+      <Circle
+        isSmall={true}
+        letter={inputValue}
+        state={ElementStates.Changing}
+      />
+    );
+    await delay(SHORT_DELAY_IN_MS);
+    setDataForVisualization([...linkedList]);
+    setModifiedItem(0);
+    setHead("head");
+    await delay(SHORT_DELAY_IN_MS);
+    setModifiedItem(null);
+    setInputValue("");
+    setCurrentAnimation(null);
   };
 
   const submitAddByIndex: FormEventHandler = async (e) => {
     e.preventDefault();
-    if (inputValue !== "" && inputIndex !== -1) {
-      setCurrentAnimationProcess("addByIndex");
-      linkedList.addByIndex(inputValue, inputIndex);
-      setHead(
-        <Circle
-          isSmall={true}
-          letter={inputValue}
-          state={ElementStates.Changing}
-        />
-      );
+    if (inputValue === "" || inputIndex === -1) return;
+    setCurrentAnimation("addByIndex");
+    linkedList.addByIndex(inputValue, inputIndex);
+    setHead(
+      <Circle
+        isSmall={true}
+        letter={inputValue}
+        state={ElementStates.Changing}
+      />
+    );
 
-      for (let i = 0; i <= inputIndex; i++) {
-        setInsertItem(i);
-        await delay(SHORT_DELAY_IN_MS);
-      }
-
-      setHead(null);
-      setDataForVisualization([...linkedList]);
-      setModifiedItem(inputIndex);
+    for (let i = 0; i <= inputIndex; i++) {
+      setInsertItem(i);
       await delay(SHORT_DELAY_IN_MS);
-      setModifiedItem(null);
-      setInputValue("");
-      setInputIndex(-1);
-      setCurrentAnimationProcess(null);
     }
+
+    setHead(null);
+    setDataForVisualization([...linkedList]);
+    setModifiedItem(inputIndex);
+    await delay(SHORT_DELAY_IN_MS);
+    setModifiedItem(null);
+    setInputValue("");
+    setInputIndex(-1);
+    setCurrentAnimation(null);
   };
 
   const getState = (index: number) => {
@@ -125,18 +123,18 @@ export const ListPage: React.FC = () => {
             <Button
               text="Добавить в head"
               type="submit"
-              disabled={inputValue === "" || currentAnimationProcess !== null}
+              disabled={inputValue === "" || currentAnimation !== null}
               linkedList="small"
-              isLoader={currentAnimationProcess === "prepend"}
+              isLoader={currentAnimation === "prepend"}
             />
             <Button
               text="Добавить в tail"
               type="button"
-              disabled={inputValue === "" || currentAnimationProcess !== null}
-              isLoader={currentAnimationProcess === "append"}
+              disabled={inputValue === "" || currentAnimation !== null}
+              isLoader={currentAnimation === "append"}
               linkedList="small"
               onClick={async () => {
-                setCurrentAnimationProcess("append");
+                setCurrentAnimation("append");
                 linkedList.append(inputValue);
                 setInsertItem(lastIndexDataForVisualization);
                 setHead(
@@ -154,20 +152,19 @@ export const ListPage: React.FC = () => {
                 setModifiedItem(null);
                 setInsertItem(null);
                 setInputValue("");
-                setCurrentAnimationProcess(null);
+                setCurrentAnimation(null);
               }}
             />
             <Button
               text="Удалить из head"
               type="button"
               disabled={
-                dataForVisualization.length === 0 ||
-                currentAnimationProcess !== null
+                dataForVisualization.length === 0 || currentAnimation !== null
               }
-              isLoader={currentAnimationProcess === "deleteHead"}
+              isLoader={currentAnimation === "deleteHead"}
               linkedList="small"
               onClick={async () => {
-                setCurrentAnimationProcess("deleteHead");
+                setCurrentAnimation("deleteHead");
                 setDeletedItem(0);
                 setDataForVisualization(["", ...[...linkedList].slice(1)]);
                 setTail(
@@ -182,20 +179,19 @@ export const ListPage: React.FC = () => {
                 setTail(null);
                 linkedList.deleteHead();
                 setDataForVisualization([...linkedList]);
-                setCurrentAnimationProcess(null);
+                setCurrentAnimation(null);
               }}
             />
             <Button
               text="Удалить из tail"
               type="button"
               disabled={
-                dataForVisualization.length === 0 ||
-                currentAnimationProcess !== null
+                dataForVisualization.length === 0 || currentAnimation !== null
               }
-              isLoader={currentAnimationProcess === "deleteTail"}
+              isLoader={currentAnimation === "deleteTail"}
               linkedList="small"
               onClick={async () => {
-                setCurrentAnimationProcess("deleteTail");
+                setCurrentAnimation("deleteTail");
                 setDeletedItem([...linkedList].length - 1);
                 setDataForVisualization([...[...linkedList].slice(0, -1), ""]);
                 setTail(
@@ -210,7 +206,7 @@ export const ListPage: React.FC = () => {
                 setTail(null);
                 linkedList.deleteTail();
                 setDataForVisualization([...linkedList]);
-                setCurrentAnimationProcess(null);
+                setCurrentAnimation(null);
               }}
             />
           </form>
@@ -231,19 +227,19 @@ export const ListPage: React.FC = () => {
               disabled={
                 inputIndex === -1 ||
                 inputValue === "" ||
-                currentAnimationProcess !== null
+                currentAnimation !== null
               }
-              isLoader={currentAnimationProcess === "addByIndex"}
+              isLoader={currentAnimation === "addByIndex"}
               linkedList="big"
             />
             <Button
               text="Удалить по индексу"
               type="button"
-              disabled={inputIndex === -1 || currentAnimationProcess !== null}
-              isLoader={currentAnimationProcess === "deleteByIndex"}
+              disabled={inputIndex === -1 || currentAnimation !== null}
+              isLoader={currentAnimation === "deleteByIndex"}
               linkedList="big"
               onClick={async () => {
-                setCurrentAnimationProcess("deleteByIndex");
+                setCurrentAnimation("deleteByIndex");
                 const letter = dataForVisualization[inputIndex];
                 setDeleteByIndex(true);
                 for (let i = 0; i <= inputIndex; i++) {
@@ -269,7 +265,7 @@ export const ListPage: React.FC = () => {
                 setDataForVisualization([...linkedList]);
                 setInputIndex(-1);
                 setDeleteByIndex(false);
-                setCurrentAnimationProcess(null);
+                setCurrentAnimation(null);
               }}
             />
           </form>
