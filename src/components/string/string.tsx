@@ -77,6 +77,7 @@ export const StringComponent: React.FC = () => {
             text="Развернуть"
             type="submit"
             isLoader={hasStartedReverseInput}
+            disabled={inputValue === ""}
           />
         </form>
         <div className={styles.circle}>

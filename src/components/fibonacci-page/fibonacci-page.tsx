@@ -9,7 +9,7 @@ import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const FibonacciPage: React.FC = () => {
-  const [inputValue, setInputValue] = useState<number>();
+  const [inputValue, setInputValue] = useState<number>(-1);
   const [dataForVisualization, setDataForVisualization] = useState<
     Array<number>
   >([]);
@@ -45,20 +45,22 @@ export const FibonacciPage: React.FC = () => {
       <Container padding={"fibonacciPage"}>
         <form className={styles.form} onSubmit={submitHandler}>
           <Input
+            placeholder="Введите текст"
+            isLimitText={true}
             maxLength={19}
-            value={inputValue}
+            value={inputValue === -1 || inputValue === 0 ? "" : inputValue}
             type="number"
             max={19}
             min={1}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInputValue(e.target.valueAsNumber)
+              setInputValue(+e.target.value)
             }
           />
           <Button
             text="Развернуть"
             type="submit"
             isLoader={isLoader}
-            disabled={(inputValue as number) > 19}
+            disabled={inputValue <= 0 || inputValue > 19}
           />
         </form>
         <div className={styles.circle}>

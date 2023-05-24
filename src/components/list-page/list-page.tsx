@@ -227,7 +227,8 @@ export const ListPage: React.FC = () => {
               disabled={
                 inputIndex === -1 ||
                 inputValue === "" ||
-                currentAnimation !== null
+                currentAnimation !== null ||
+                inputIndex > dataForVisualization.length
               }
               isLoader={currentAnimation === "addByIndex"}
               linkedList="big"
@@ -235,7 +236,11 @@ export const ListPage: React.FC = () => {
             <Button
               text="Удалить по индексу"
               type="button"
-              disabled={inputIndex === -1 || currentAnimation !== null}
+              disabled={
+                inputIndex === -1 ||
+                currentAnimation !== null ||
+                inputIndex > dataForVisualization.length - 1
+              }
               isLoader={currentAnimation === "deleteByIndex"}
               linkedList="big"
               onClick={async () => {
