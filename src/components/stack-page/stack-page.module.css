@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  max-width: 567px;
+  margin: auto;
+  gap: 12px;
+  padding-bottom: 48px;
+}
+
+.circle {
+  display: flex;
+  max-width: 944px;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  row-gap: 48px;
+}
