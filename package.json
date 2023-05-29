@@ -1,5 +1,6 @@
 {
   "name": "algorithms-project",
+  "homepage": "https://margo-yunanova.github.io/algososh",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
