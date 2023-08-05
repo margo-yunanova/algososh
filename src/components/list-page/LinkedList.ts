@@ -22,11 +22,11 @@ export class LinkedList<T> implements TLinkedList<T> {
   private size: number;
   head: LinkedListNode<T> | null;
 
-  constructor(array: Array<T> = []) {
+  constructor(initialData: Array<T> = []) {
     this.size = 0;
     this.head = null;
 
-    for (const item of array) {
+    for (const item of initialData) {
       this.append(item);
     }
   }
