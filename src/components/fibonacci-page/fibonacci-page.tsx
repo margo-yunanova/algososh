@@ -8,25 +8,25 @@ import { Circle } from "../ui/circle/circle";
 import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
+export const getFibonacciSequence = (number: number): Array<number> => {
+  let first = 0;
+  let second = 1;
+  const fibonacciSequence: Array<number> = [second];
+  for (let i = 0; i < number; i++) {
+    let third = first + second;
+    fibonacciSequence.push(third);
+    first = second;
+    second = third;
+  }
+  return fibonacciSequence;
+};
+
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(-1);
   const [dataForVisualization, setDataForVisualization] = useState<
     Array<number>
   >([]);
   const [isLoader, setLoader] = useState<boolean>(false);
-
-  const getFibonacciSequence = (number: number): Array<number> => {
-    let first = 0;
-    let second = 1;
-    const fibonacciSequence: Array<number> = [second];
-    for (let i = 0; i < number; i++) {
-      let third = first + second;
-      fibonacciSequence.push(third);
-      first = second;
-      second = third;
-    }
-    return fibonacciSequence;
-  };
 
   const submitHandler: FormEventHandler = async (e) => {
     e.preventDefault();
