@@ -43,7 +43,7 @@ export const FibonacciPage: React.FC = () => {
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
       <Container padding={"fibonacciPage"}>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form} onSubmit={submitHandler} data-cy="form">
           <Input
             placeholder="Введите текст"
             isLimitText={true}
@@ -55,15 +55,17 @@ export const FibonacciPage: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInputValue(+e.target.value)
             }
+            data-cy="input"
           />
           <Button
             text="Рассчитать"
             type="submit"
             isLoader={isLoader}
             disabled={inputValue <= 0 || inputValue > 19}
+            data-cy="button"
           />
         </form>
-        <div className={styles.circle}>
+        <div className={styles.circle} data-cy="fibonacci-page_circle">
           {dataForVisualization &&
             dataForVisualization.map((value, index) => (
               <Circle letter={value.toString()} key={index} index={index} />
