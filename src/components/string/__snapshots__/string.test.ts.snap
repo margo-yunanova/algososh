@@ -200,3 +200,25 @@ exports[`reverse string one char 1`] = `
   ],
 }
 `;
+
+exports[`reverse string one char 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data": Array [
+          "я",
+        ],
+        "firstIndex": 0,
+        "secondIndex": 0,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
