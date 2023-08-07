@@ -9,6 +9,23 @@ import { delay, swap } from "../../constants/utils";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
 
+export const reverseString = async (input: string, setState: any) => {
+  const array = input.split("");
+  let lastIndex = array.length - 1;
+  for (let i = 0; i < array.length / 2; i++) {
+    swap(array, i, lastIndex);
+
+    setState({
+      firstIndex: i,
+      secondIndex: lastIndex,
+      data: [...array],
+    });
+
+    await delay(DELAY_IN_MS);
+    lastIndex--;
+  }
+};
+
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [{ firstIndex, secondIndex, data }, setDataForVisualization] =
@@ -22,21 +39,6 @@ export const StringComponent: React.FC = () => {
       data: [],
     });
   const [hasStartedReverseInput, setStartReverseInput] = useState(false);
-
-  const reverseInput = async (input: string) => {
-    const array = input.split("");
-    let lastIndex = array.length - 1;
-    for (let i = 0; i < array.length / 2; i++) {
-      swap(array, i, lastIndex);
-      setDataForVisualization({
-        firstIndex: i,
-        secondIndex: lastIndex,
-        data: array,
-      });
-      await delay(DELAY_IN_MS);
-      lastIndex--;
-    }
-  };
 
   const getCircleState = (
     index: number,
@@ -66,7 +68,7 @@ export const StringComponent: React.FC = () => {
     });
     setStartReverseInput(true);
     await delay(DELAY_IN_MS);
-    await reverseInput(inputValue);
+    await reverseString(inputValue, setDataForVisualization);
     setStartReverseInput(false);
   };
 
