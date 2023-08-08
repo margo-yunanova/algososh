@@ -36,7 +36,7 @@ export const StackPage: React.FC = () => {
   return (
     <SolutionLayout title="Стек">
       <Container padding={"stackPage"}>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form} onSubmit={submitHandler} data-cy="form">
           <Input
             maxLength={4}
             value={inputValue}
@@ -45,8 +45,14 @@ export const StackPage: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInputValue(e.target.value);
             }}
+            data-cy="input"
           />
-          <Button text="Добавить" type="submit" disabled={inputValue === ""} />
+          <Button
+            text="Добавить"
+            type="submit"
+            disabled={inputValue === ""}
+            data-cy="addButton"
+          />
           <Button
             text="Удалить"
             type="button"
@@ -58,6 +64,7 @@ export const StackPage: React.FC = () => {
               setDataForVisualization([...stack]);
               setStateTopOfStack(ElementStates.Default);
             }}
+            data-cy="deleteButton"
           />
           <Button
             text="Очистить"
@@ -67,6 +74,7 @@ export const StackPage: React.FC = () => {
               stack.clear();
               setDataForVisualization([...stack]);
             }}
+            data-cy="clearButton"
           />
         </form>
         <div className={styles.circle}>
