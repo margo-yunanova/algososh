@@ -3,15 +3,18 @@
 exports[`renders circle with default changing 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   changing"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -26,15 +29,18 @@ exports[`renders circle with default changing 1`] = `
 exports[`renders circle with default modified 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   modified"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -49,15 +55,18 @@ exports[`renders circle with default modified 1`] = `
 exports[`renders circle with default state 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -72,6 +81,7 @@ exports[`renders circle with default state 1`] = `
 exports[`renders circle with head 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head string"
@@ -80,9 +90,11 @@ exports[`renders circle with head 1`] = `
   </div>
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -97,21 +109,25 @@ exports[`renders circle with head 1`] = `
 exports[`renders circle with head component 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   >
     <div
       className="content "
+      data-cy="content"
     >
       <div
         className="text text_type_input text_color_input mb-4 absolute head element"
       />
       <div
         className="circle  small default"
+        data-cy="state"
       >
         <p
           className="text text_type_circle text_color_input letter"
+          data-cy="letter"
         />
       </div>
       <p
@@ -124,9 +140,11 @@ exports[`renders circle with head component 1`] = `
   </div>
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -141,15 +159,18 @@ exports[`renders circle with head component 1`] = `
 exports[`renders circle with index 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -166,15 +187,18 @@ exports[`renders circle with index 1`] = `
 exports[`renders circle with letter 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     >
       M
     </p>
@@ -191,15 +215,18 @@ exports[`renders circle with letter 1`] = `
 exports[`renders circle with prop isSmall 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle  small default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -214,15 +241,18 @@ exports[`renders circle with prop isSmall 1`] = `
 exports[`renders circle with tail 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     />
   </div>
   <p
@@ -239,15 +269,18 @@ exports[`renders circle with tail 1`] = `
 exports[`renders circle without letter 1`] = `
 <div
   className="content "
+  data-cy="content"
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
   />
   <div
     className="circle   default"
+    data-cy="state"
   >
     <p
       className="text text_type_circle text_color_input letter"
+      data-cy="letter"
     >
       
     </p>
