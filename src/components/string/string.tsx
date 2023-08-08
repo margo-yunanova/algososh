@@ -27,17 +27,20 @@ export const reverseString = async (input: string, setState: any) => {
 };
 
 export const StringComponent: React.FC = () => {
+  type TReverseState = {
+    firstIndex?: number;
+    secondIndex?: number;
+    data: string[];
+  };
+
   const [inputValue, setInputValue] = useState<string>("");
   const [{ firstIndex, secondIndex, data }, setDataForVisualization] =
-    useState<{
-      firstIndex?: number;
-      secondIndex?: number;
-      data: string[];
-    }>({
+    useState<TReverseState>({
       firstIndex: undefined,
       secondIndex: undefined,
       data: [],
     });
+
   const [hasStartedReverseInput, setStartReverseInput] = useState(false);
 
   const getCircleState = (
