@@ -9,30 +9,64 @@ import { delay, swap } from "../../constants/utils";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
 
-export const reverseString = async (input: string, setState: any) => {
+type TReverseState = {
+  firstIndex?: number;
+  secondIndex?: number;
+  data: string[];
+};
+
+// export const reverseString = async (input: string, setState: any) => {
+//   const array = input.split("");
+//   let lastIndex = array.length - 1;
+//   for (let i = 0; i < array.length / 2; i++) {
+//     swap(array, i, lastIndex);
+
+//     setState({
+//       firstIndex: i,
+//       secondIndex: lastIndex,
+//       data: [...array],
+//     });
+
+//     await delay(DELAY_IN_MS);
+//     lastIndex--;
+//   }
+// };
+
+// export const reverseString = (input: string) => {
+//   const results: Array<TReverseState> = [];
+//   const array = input.split("");
+//   let lastIndex = array.length - 1;
+//   for (let i = 0; i < array.length / 2; i++) {
+//     swap(array, i, lastIndex);
+
+//     results.push({
+//       firstIndex: i,
+//       secondIndex: lastIndex,
+//       data: [...array],
+//     });
+
+//     lastIndex--;
+//   }
+//   return results;
+// };
+
+export function* reverseString(input: string) {
   const array = input.split("");
   let lastIndex = array.length - 1;
   for (let i = 0; i < array.length / 2; i++) {
     swap(array, i, lastIndex);
 
-    setState({
+    yield {
       firstIndex: i,
       secondIndex: lastIndex,
       data: [...array],
-    });
+    };
 
-    await delay(DELAY_IN_MS);
     lastIndex--;
   }
-};
+}
 
 export const StringComponent: React.FC = () => {
-  type TReverseState = {
-    firstIndex?: number;
-    secondIndex?: number;
-    data: string[];
-  };
-
   const [inputValue, setInputValue] = useState<string>("");
   const [{ firstIndex, secondIndex, data }, setDataForVisualization] =
     useState<TReverseState>({
@@ -71,7 +105,12 @@ export const StringComponent: React.FC = () => {
     });
     setStartReverseInput(true);
     await delay(DELAY_IN_MS);
-    await reverseString(inputValue, setDataForVisualization);
+    // await reverseString(inputValue, setDataForVisualization);
+    //for (const state of reverseStrings(inputValue)) {
+    for (const state of reverseString(inputValue)) {
+      setDataForVisualization(state);
+      await delay(DELAY_IN_MS);
+    }
     setStartReverseInput(false);
   };
 

@@ -1,202 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reverse string empty string 1`] = `[MockFunction]`;
+exports[`reverse string2 empty string 1`] = `Array []`;
 
-exports[`reverse string even string length 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data": Array [
-          "т",
-          "р",
-          "и",
-          "в",
-          "е",
-          "п",
-        ],
-        "firstIndex": 0,
-        "secondIndex": 5,
-      },
+exports[`reverse string2 even string length 1`] = `
+Array [
+  Object {
+    "data": Array [
+      "т",
+      "р",
+      "и",
+      "в",
+      "е",
+      "п",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "т",
-          "е",
-          "и",
-          "в",
-          "р",
-          "п",
-        ],
-        "firstIndex": 1,
-        "secondIndex": 4,
-      },
+    "firstIndex": 0,
+    "secondIndex": 5,
+  },
+  Object {
+    "data": Array [
+      "т",
+      "е",
+      "и",
+      "в",
+      "р",
+      "п",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "т",
-          "е",
-          "в",
-          "и",
-          "р",
-          "п",
-        ],
-        "firstIndex": 2,
-        "secondIndex": 3,
-      },
+    "firstIndex": 1,
+    "secondIndex": 4,
+  },
+  Object {
+    "data": Array [
+      "т",
+      "е",
+      "в",
+      "и",
+      "р",
+      "п",
     ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
+    "firstIndex": 2,
+    "secondIndex": 3,
+  },
+]
 `;
 
-exports[`reverse string odd string length 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data": Array [
-          "а",
-          "у",
-          "з",
-          "и",
-          "н",
-          "а",
-          "т",
-          "р",
-          "к",
-        ],
-        "firstIndex": 0,
-        "secondIndex": 8,
-      },
+exports[`reverse string2 odd string length 1`] = `
+Array [
+  Object {
+    "data": Array [
+      "а",
+      "у",
+      "з",
+      "и",
+      "н",
+      "а",
+      "т",
+      "р",
+      "к",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "а",
-          "р",
-          "з",
-          "и",
-          "н",
-          "а",
-          "т",
-          "у",
-          "к",
-        ],
-        "firstIndex": 1,
-        "secondIndex": 7,
-      },
+    "firstIndex": 0,
+    "secondIndex": 8,
+  },
+  Object {
+    "data": Array [
+      "а",
+      "р",
+      "з",
+      "и",
+      "н",
+      "а",
+      "т",
+      "у",
+      "к",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "а",
-          "р",
-          "т",
-          "и",
-          "н",
-          "а",
-          "з",
-          "у",
-          "к",
-        ],
-        "firstIndex": 2,
-        "secondIndex": 6,
-      },
+    "firstIndex": 1,
+    "secondIndex": 7,
+  },
+  Object {
+    "data": Array [
+      "а",
+      "р",
+      "т",
+      "и",
+      "н",
+      "а",
+      "з",
+      "у",
+      "к",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "а",
-          "р",
-          "т",
-          "а",
-          "н",
-          "и",
-          "з",
-          "у",
-          "к",
-        ],
-        "firstIndex": 3,
-        "secondIndex": 5,
-      },
+    "firstIndex": 2,
+    "secondIndex": 6,
+  },
+  Object {
+    "data": Array [
+      "а",
+      "р",
+      "т",
+      "а",
+      "н",
+      "и",
+      "з",
+      "у",
+      "к",
     ],
-    Array [
-      Object {
-        "data": Array [
-          "а",
-          "р",
-          "т",
-          "а",
-          "н",
-          "и",
-          "з",
-          "у",
-          "к",
-        ],
-        "firstIndex": 4,
-        "secondIndex": 4,
-      },
+    "firstIndex": 3,
+    "secondIndex": 5,
+  },
+  Object {
+    "data": Array [
+      "а",
+      "р",
+      "т",
+      "а",
+      "н",
+      "и",
+      "з",
+      "у",
+      "к",
     ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
+    "firstIndex": 4,
+    "secondIndex": 4,
+  },
+]
 `;
 
-exports[`reverse string one char 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data": Array [
-          "я",
-        ],
-        "firstIndex": 0,
-        "secondIndex": 0,
-      },
+exports[`reverse string2 one char 1`] = `
+Array [
+  Object {
+    "data": Array [
+      "я",
     ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
+    "firstIndex": 0,
+    "secondIndex": 0,
+  },
+]
 `;
