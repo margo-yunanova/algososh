@@ -15,7 +15,7 @@ type TReverseState = {
   data: string[];
 };
 
-// export const reverseString = async (input: string, setState: any) => {
+// export const reverseStringDelay = async (input: string, setState: any) => {
 //   const array = input.split("");
 //   let lastIndex = array.length - 1;
 //   for (let i = 0; i < array.length / 2; i++) {

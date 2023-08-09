@@ -1,7 +1,9 @@
-import { reverseString } from "./string";
+import { reverseString, reverseStringDelay } from "./string";
+import * as utils from "../../constants/utils";
+
 // jest.setTimeout(20000);
 
-describe("reverse string2", () => {
+describe("reverse string", () => {
   it("even string length", async () => {
     expect([...reverseString("привет")]).toMatchSnapshot();
   });
@@ -20,27 +22,71 @@ describe("reverse string2", () => {
 });
 
 // describe("reverse string", () => {
+//   let spyDelay: jest.SpyInstance<unknown>;
+//   beforeEach(() => {
+//     const originSetTimeout = setTimeout;
+
+//     spyDelay = jest
+//       // .spyOn(utils, "delay")
+//       // .mockImplementation(() => Promise.resolve());
+//       .spyOn(global, "setTimeout")
+//       .mockImplementation((cb, ms) => originSetTimeout(cb, 0));
+//   });
+//   afterEach(() => {
+//     jest.restoreAllMocks();
+//   });
+
 //   it("even string length", async () => {
 //     const mockCallback = jest.fn();
-//     await reverseString("привет", mockCallback);
+//     await reverseStringDelay("привет", mockCallback);
+//     expect(mockCallback).toMatchSnapshot();
+//     expect(spyDelay).toHaveBeenCalledTimes(3);
+//   });
+
+//   it("odd string length", async () => {
+//     const mockCallback = jest.fn();
+//     await reverseStringDelay("кузинатра", mockCallback);
+//     expect(mockCallback).toMatchSnapshot();
+//     expect(spyDelay).toHaveBeenCalledTimes(5);
+//   });
+
+//   it("one char", async () => {
+//     const mockCallback = jest.fn();
+//     await reverseStringDelay("я", mockCallback);
+//     expect(mockCallback).toMatchSnapshot();
+//     expect(spyDelay).toHaveBeenCalledTimes(1);
+//   });
+
+//   it("empty string", async () => {
+//     const mockCallback = jest.fn();
+//     await reverseStringDelay("", mockCallback);
+//     expect(mockCallback).toMatchSnapshot();
+//     expect(spyDelay).toHaveBeenCalledTimes(0);
+//   });
+// });
+
+// describe("reverse string", () => {
+//   it("even string length", async () => {
+//     const mockCallback = jest.fn();
+//     await reverseStringDelay("привет", mockCallback);
 //     expect(mockCallback).toMatchSnapshot();
 //   });
 
 //   it("odd string length", async () => {
 //     const mockCallback = jest.fn();
-//     await reverseString("кузинатра", mockCallback);
+//     await reverseStringDelay("кузинатра", mockCallback);
 //     expect(mockCallback).toMatchSnapshot();
 //   });
 
 //   it("one char", async () => {
 //     const mockCallback = jest.fn();
-//     await reverseString("я", mockCallback);
+//     await reverseStringDelay("я", mockCallback);
 //     expect(mockCallback).toMatchSnapshot();
 //   });
 
 //   it("empty string", async () => {
 //     const mockCallback = jest.fn();
-//     await reverseString("", mockCallback);
+//     await reverseStringDelay("", mockCallback);
 //     expect(mockCallback).toMatchSnapshot();
 //   });
 // });

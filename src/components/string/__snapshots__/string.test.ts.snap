@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reverse string2 empty string 1`] = `Array []`;
+exports[`reverse string empty string 1`] = `Array []`;
 
-exports[`reverse string2 even string length 1`] = `
+exports[`reverse string even string length 1`] = `
 Array [
   Object {
     "data": Array [
@@ -43,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`reverse string2 odd string length 1`] = `
+exports[`reverse string odd string length 1`] = `
 Array [
   Object {
     "data": Array [
@@ -123,7 +123,7 @@ Array [
 ]
 `;
 
-exports[`reverse string2 one char 1`] = `
+exports[`reverse string one char 1`] = `
 Array [
   Object {
     "data": Array [
