@@ -15,13 +15,13 @@ describe("The String Page", () => {
   });
 
   it("string is reversed", () => {
-    const colors = {
+    const colorsMap = {
       d: "rgb(0, 50, 255)",
       m: "rgb(127, 224, 81)",
       c: "rgb(210, 82, 225)",
     };
     const words = ["привет", "тривеп", "теиврп", "тевирп"];
-    const colorsCod = ["dddddd", "cddddc", "mcddcm", "mmmmmm"];
+    const color = ["dddddd", "cddddc", "mcddcm", "mmmmmm"];
 
     cy.get('[data-cy="input"]').should("be.empty").type(words[0]);
     cy.get('[data-cy="button"]').click();
@@ -32,7 +32,7 @@ describe("The String Page", () => {
         cy.get('[data-cy="state"]')
           .eq(j)
           .should("have.css", "border-color")
-          .should("equal", colors[colorsCod[i][j]]);
+          .should("equal", colorsMap[color[i][j]]);
       }
     }
 
