@@ -24,7 +24,7 @@ export type TSortState = {
 };
 
 export type TStateCallback = (state?: TSortState) => TSortState;
-type TSetState = (state: TStateCallback) => void;
+export type TSetState = (state: TStateCallback) => void;
 
 export const bubbleSort = async (
   array: Array<number>,
@@ -57,7 +57,7 @@ export const bubbleSort = async (
   }));
 };
 
-const selectionSort = async (
+export const selectionSort = async (
   array: Array<number>,
   direction: Direction,
   setState: TSetState
@@ -89,7 +89,44 @@ const selectionSort = async (
     ...state,
     firstIndex: undefined,
     secondIndex: undefined,
-    sortedColumnIndex: state!.sortedArray!.length - 1,
+    sortedColumnIndex: array.length - 1,
+  }));
+};
+
+export const selectionSort2 = async (
+  array: Array<number>,
+  direction: Direction,
+  setData: any
+) => {
+  const state: TSortState = {
+    firstIndex: undefined,
+    secondIndex: undefined,
+    sortedArray: array,
+    sortedColumnIndex: undefined,
+  };
+  for (let i = 0; i < array.length - 1; i++) {
+    state.firstIndex = i;
+    setData({ ...state });
+    let minIndex = i;
+    for (let j = i + 1; j < array.length; j++) {
+      await delay(DELAY_IN_MS);
+      state.secondIndex = j;
+      setData({ ...state });
+      if (compareArrayItems(direction, array, minIndex, j)) {
+        minIndex = j;
+      }
+    }
+    swap(array, i, minIndex);
+    state.sortedArray = [...array];
+    state.sortedColumnIndex = i;
+    setData({ ...state });
+  }
+
+  setData((state: TSetState) => ({
+    ...state,
+    firstIndex: undefined,
+    secondIndex: undefined,
+    sortedColumnIndex: array.length - 1,
   }));
 };
 
