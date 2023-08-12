@@ -49,8 +49,8 @@ export const bubbleSort = async (
     }
     setState((state) => ({ ...state, sortedColumnIndex: i }));
   }
-  setState((state) => ({
-    ...state,
+  setState(() => ({
+    sortedArray: [...array],
     firstIndex: undefined,
     secondIndex: undefined,
     sortedColumnIndex: 0,
@@ -85,8 +85,8 @@ export const selectionSort = async (
       sortedColumnIndex: i,
     }));
   }
-  setState((state) => ({
-    ...state,
+  setState(() => ({
+    sortedArray: [...array],
     firstIndex: undefined,
     secondIndex: undefined,
     sortedColumnIndex: array.length - 1,
@@ -123,7 +123,7 @@ export const selectionSort2 = async (
   }
 
   setData((state: TSetState) => ({
-    ...state,
+    sortedArray: [...array],
     firstIndex: undefined,
     secondIndex: undefined,
     sortedColumnIndex: array.length - 1,
