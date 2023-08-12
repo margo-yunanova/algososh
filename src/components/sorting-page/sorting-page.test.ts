@@ -6,6 +6,7 @@ import {
   selectionSort2,
 } from "./sorting-page";
 import * as utils from "../../constants/utils";
+import fc from "fast-check";
 
 describe.each([
   ["bubbleSort", bubbleSort],
@@ -50,5 +51,25 @@ describe.each([
   ])("Sort descending %s", async (_, initialData, expected) => {
     await func(initialData, Direction.Descending, mockSetState);
     expect(result).toEqual(expected);
+  });
+
+  test.each([
+    {
+      direction: Direction.Ascending,
+      compareFn: (a: number, b: number) => a - b,
+    },
+    {
+      direction: Direction.Descending,
+      compareFn: (a, b) => b - a,
+    },
+  ])("Random sort $direction", async ({ direction, compareFn }) => {
+    await fc.assert(
+      fc.asyncProperty(fc.array(fc.integer()), async (initialData) => {
+        result = [];
+        const temp = [...initialData];
+        await func(initialData, direction, mockSetState);
+        expect(result).toEqual(temp.sort(compareFn));
+      })
+    );
   });
 });
