@@ -16,15 +16,49 @@ import {
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
 
+export type TSortState = {
+  firstIndex?: number;
+  secondIndex?: number;
+  sortedArray?: number[];
+  sortedColumnIndex?: number;
+};
+
+export type TStateCallback = (state?: TSortState) => TSortState;
+type TSetState = (state: TStateCallback) => void;
+
+export const bubbleSort = async (
+  array: Array<number>,
+  direction: Direction,
+  setState: TSetState
+) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    for (let j = 0; j < i; j++) {
+      setState((state) => ({
+        ...state,
+        firstIndex: j,
+        secondIndex: j + 1,
+      }));
+      await delay(DELAY_IN_MS);
+      if (compareArrayItems(direction, array, j, j + 1)) {
+        swap(array, j, j + 1);
+        setState((state) => ({
+          ...state,
+          sortedArray: [...array],
+        }));
+      }
+    }
+    setState((state) => ({ ...state, sortedColumnIndex: i }));
+  }
+  setState((state) => ({
+    ...state,
+    firstIndex: undefined,
+    secondIndex: undefined,
+    sortedColumnIndex: 0,
+  }));
+};
+
 export const SortingPage: FC = () => {
   type TSortingAlgorithm = "selectionSort" | "bubbleSort";
-
-  type TSortState = {
-    firstIndex?: number;
-    secondIndex?: number;
-    sortedArray: number[];
-    sortedColumnIndex?: number;
-  };
 
   const [checkedRadioButton, setCheckedRadioButton] =
     useState<TSortingAlgorithm>("selectionSort");
@@ -36,26 +70,6 @@ export const SortingPage: FC = () => {
       sortedArray: randomArr(3, 17, 100),
       sortedColumnIndex: undefined,
     }));
-
-  const bubbleSort = async (array: Array<number>, direction: Direction) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      for (let j = 0; j < i; j++) {
-        setData((state) => ({ ...state, firstIndex: j, secondIndex: j + 1 }));
-        await delay(DELAY_IN_MS);
-        if (compareArrayItems(direction, array, j, j + 1)) {
-          swap(array, j, j + 1);
-          setData((state) => ({ ...state, sortedArray: [...array] }));
-        }
-      }
-      setData((state) => ({ ...state, sortedColumnIndex: i }));
-    }
-    setData((state) => ({
-      ...state,
-      firstIndex: undefined,
-      secondIndex: undefined,
-      sortedColumnIndex: 0,
-    }));
-  };
 
   const selectionSort = async (array: Array<number>, direction: Direction) => {
     const state: TSortState = {
@@ -81,19 +95,19 @@ export const SortingPage: FC = () => {
       state.sortedColumnIndex = i;
       setData({ ...state });
     }
-    setData((state) => ({
+    state.firstIndex = undefined;
+    state.secondIndex = undefined;
+    state.sortedColumnIndex = sortedArray!.length - 1;
+    setData({
       ...state,
-      firstIndex: undefined,
-      secondIndex: undefined,
-      sortedColumnIndex: sortedArray.length - 1,
-    }));
+    });
   };
 
   const sort = async (direction: Direction) => {
     if (checkedRadioButton === "bubbleSort") {
-      await bubbleSort(sortedArray, direction);
+      await bubbleSort(sortedArray!, direction, setData);
     } else {
-      await selectionSort(sortedArray, direction);
+      await selectionSort(sortedArray!, direction);
     }
   };
 
@@ -173,9 +187,14 @@ export const SortingPage: FC = () => {
           />
         </nav>
         <div className={styles.array}>
-          {sortedArray.map((number, index) => (
-            <Column state={getColumnState(index)} index={number} key={index} />
-          ))}
+          {sortedArray?.length &&
+            sortedArray.map((number, index) => (
+              <Column
+                state={getColumnState(index)}
+                index={number}
+                key={index}
+              />
+            ))}
         </div>
       </Container>
     </SolutionLayout>
