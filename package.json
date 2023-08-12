@@ -49,6 +49,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.5",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-test-renderer": "^18.0.0",
     "cypress": "^12.14.0",
     "eslint-plugin-cypress": "^2.13.3",
     "react-test-renderer": "^17.0.2"
