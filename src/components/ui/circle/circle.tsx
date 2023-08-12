@@ -30,6 +30,7 @@ export const Circle: React.FC<CircleProps> = ({
         } ${styles.head} ${
           styles[typeof head === "string" ? "string" : "element"]
         }`}
+        data-cy="head"
       >
         {head}
       </div>
@@ -57,6 +58,7 @@ export const Circle: React.FC<CircleProps> = ({
         } ${index?.toString() ? styles.tail60 : styles.tail30} ${
           styles[typeof tail === "string" ? "string" : "element"]
         }`}
+        data-cy="tail"
       >
         {tail}
       </div>

@@ -7,6 +7,7 @@ exports[`renders circle with default changing 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   changing"
@@ -22,6 +23,7 @@ exports[`renders circle with default changing 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -33,6 +35,7 @@ exports[`renders circle with default modified 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   modified"
@@ -48,6 +51,7 @@ exports[`renders circle with default modified 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -59,6 +63,7 @@ exports[`renders circle with default state 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   default"
@@ -74,6 +79,7 @@ exports[`renders circle with default state 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -85,6 +91,7 @@ exports[`renders circle with head 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head string"
+    data-cy="head"
   >
     head
   </div>
@@ -102,6 +109,7 @@ exports[`renders circle with head 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -113,6 +121,7 @@ exports[`renders circle with head component 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   >
     <div
       className="content "
@@ -120,6 +129,7 @@ exports[`renders circle with head component 1`] = `
     >
       <div
         className="text text_type_input text_color_input mb-4 absolute head element"
+        data-cy="head"
       />
       <div
         className="circle  small default"
@@ -135,6 +145,7 @@ exports[`renders circle with head component 1`] = `
       />
       <div
         className="text text_type_input text_color_input mt-4 absolute tail30 element"
+        data-cy="tail"
       />
     </div>
   </div>
@@ -152,6 +163,7 @@ exports[`renders circle with head component 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -163,6 +175,7 @@ exports[`renders circle with index 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   default"
@@ -180,6 +193,7 @@ exports[`renders circle with index 1`] = `
   </p>
   <div
     className="text text_type_input text_color_input mt-4 absolute tail60 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -191,6 +205,7 @@ exports[`renders circle with letter 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   default"
@@ -208,6 +223,7 @@ exports[`renders circle with letter 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -219,6 +235,7 @@ exports[`renders circle with prop isSmall 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle  small default"
@@ -234,6 +251,7 @@ exports[`renders circle with prop isSmall 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
@@ -245,6 +263,7 @@ exports[`renders circle with tail 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   default"
@@ -260,6 +279,7 @@ exports[`renders circle with tail 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 string"
+    data-cy="tail"
   >
     tail
   </div>
@@ -273,6 +293,7 @@ exports[`renders circle without letter 1`] = `
 >
   <div
     className="text text_type_input text_color_input mb-4 absolute head element"
+    data-cy="head"
   />
   <div
     className="circle   default"
@@ -290,6 +311,7 @@ exports[`renders circle without letter 1`] = `
   />
   <div
     className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    data-cy="tail"
   />
 </div>
 `;
