@@ -7,20 +7,13 @@ import * as utils from "../../constants/utils";
 // jest.setTimeout(20000);
 
 describe("reverse string", () => {
-  it("even string length", async () => {
-    expect([...reverseString("привет")]).toMatchSnapshot();
-  });
-
-  it("odd string length", async () => {
-    expect([...reverseString("кузинатра")]).toMatchSnapshot();
-  });
-
-  it("one char", async () => {
-    expect([...reverseString("я")]).toMatchSnapshot();
-  });
-
-  it("empty string", async () => {
-    expect([...reverseString("")]).toMatchSnapshot();
+  test.each([
+    ["even string length", "привет"],
+    ["odd string length", "кузинатра"],
+    ["one char", "я"],
+    ["empty string", ""],
+  ])("%s", (_, initialValue) => {
+    expect([...reverseString(initialValue)]).toMatchSnapshot();
   });
 });
 
