@@ -57,6 +57,42 @@ export const bubbleSort = async (
   }));
 };
 
+const selectionSort = async (
+  array: Array<number>,
+  direction: Direction,
+  setState: TSetState
+) => {
+  for (let i = 0; i < array.length - 1; i++) {
+    setState((state) => ({
+      ...state,
+      firstIndex: i,
+    }));
+    let minIndex = i;
+    for (let j = i + 1; j < array.length; j++) {
+      await delay(DELAY_IN_MS);
+      setState((state) => ({
+        ...state,
+        secondIndex: j,
+      }));
+      if (compareArrayItems(direction, array, minIndex, j)) {
+        minIndex = j;
+      }
+    }
+    swap(array, i, minIndex);
+    setState((state) => ({
+      ...state,
+      sortedArray: [...array],
+      sortedColumnIndex: i,
+    }));
+  }
+  setState((state) => ({
+    ...state,
+    firstIndex: undefined,
+    secondIndex: undefined,
+    sortedColumnIndex: state!.sortedArray!.length - 1,
+  }));
+};
+
 export const SortingPage: FC = () => {
   type TSortingAlgorithm = "selectionSort" | "bubbleSort";
 
@@ -71,43 +107,11 @@ export const SortingPage: FC = () => {
       sortedColumnIndex: undefined,
     }));
 
-  const selectionSort = async (array: Array<number>, direction: Direction) => {
-    const state: TSortState = {
-      firstIndex: undefined,
-      secondIndex: undefined,
-      sortedArray: array,
-      sortedColumnIndex: undefined,
-    };
-    for (let i = 0; i < array.length - 1; i++) {
-      state.firstIndex = i;
-      setData({ ...state });
-      let minIndex = i;
-      for (let j = i + 1; j < array.length; j++) {
-        await delay(DELAY_IN_MS);
-        state.secondIndex = j;
-        setData({ ...state });
-        if (compareArrayItems(direction, array, minIndex, j)) {
-          minIndex = j;
-        }
-      }
-      swap(array, i, minIndex);
-      state.sortedArray = [...array];
-      state.sortedColumnIndex = i;
-      setData({ ...state });
-    }
-    state.firstIndex = undefined;
-    state.secondIndex = undefined;
-    state.sortedColumnIndex = sortedArray!.length - 1;
-    setData({
-      ...state,
-    });
-  };
-
   const sort = async (direction: Direction) => {
     if (checkedRadioButton === "bubbleSort") {
       await bubbleSort(sortedArray!, direction, setData);
     } else {
-      await selectionSort(sortedArray!, direction);
+      await selectionSort(sortedArray!, direction, setData);
     }
   };
 
