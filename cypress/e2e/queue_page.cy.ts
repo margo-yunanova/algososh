@@ -1,13 +1,11 @@
 describe("The Stack Page", () => {
-  let colorChanged, colorDefault;
+  const colorDefault = "rgb(0, 50, 255)";
+  const colorChanged = "rgb(210, 82, 225)";
 
   beforeEach(() => {
     cy.visit("/");
     cy.get('[data-cy="linkQueue"]').click();
     cy.url().should("include", "/queue");
-
-    colorDefault = "rgb(0, 50, 255)";
-    colorChanged = "rgb(210, 82, 225)";
   });
 
   it("add button is disabled", () => {
