@@ -15,6 +15,8 @@ export enum Selectors {
   addButtonTail = '[data-cy="addButtonTail"]',
   addButtonIndex = '[data-cy="addButtonIndex"]',
   deleteButtonIndex = '[data-cy="deleteButtonIndex"]',
+  clearButton = '[data-cy="clearButton"]',
+  deleteButton = '[data-cy="deleteButton"]',
 }
 
 export enum Colors {

@@ -36,7 +36,11 @@ export const StackPage: React.FC = () => {
   return (
     <SolutionLayout title="Стек">
       <Container padding={"stackPage"}>
-        <form className={styles.form} onSubmit={submitHandler} data-cy="form">
+        <form
+          className={styles.form}
+          onSubmit={submitHandler}
+          data-cy="formValue"
+        >
           <Input
             maxLength={4}
             value={inputValue}
@@ -45,13 +49,13 @@ export const StackPage: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInputValue(e.target.value);
             }}
-            data-cy="input"
+            data-cy="inputValue"
           />
           <Button
             text="Добавить"
             type="submit"
             disabled={inputValue === ""}
-            data-cy="addButton"
+            data-cy="button"
           />
           <Button
             text="Удалить"

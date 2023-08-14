@@ -1,3 +1,5 @@
+import { Selectors } from "../../src/constants/cypress-constants";
+
 describe("The Stack Page", () => {
   let colorChanged, colorDefault;
 
@@ -11,10 +13,10 @@ describe("The Stack Page", () => {
   });
 
   it("add button is disabled", () => {
-    cy.get('[data-cy="form"]').within(() => {
-      cy.get('[data-cy="input"]')
+    cy.get(Selectors.formValue).within(() => {
+      cy.get(Selectors.inputValue)
         .should("be.empty")
-        .get('[data-cy="addButton"]')
+        .get(Selectors.button)
         .should("be.disabled");
     });
   });
@@ -22,15 +24,15 @@ describe("The Stack Page", () => {
   describe("with data", () => {
     it("add", () => {
       for (let i = 0; i < 4; i++) {
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').click();
-        cy.get('[data-cy="head"]').eq(i).should("have.text", `top`);
-        cy.get('[data-cy="letter"]').eq(i).should("have.text", `${i}`);
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).click();
+        cy.get(Selectors.head).eq(i).should("have.text", `top`);
+        cy.get(Selectors.letter).eq(i).should("have.text", `${i}`);
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorChanged);
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorDefault);
@@ -39,16 +41,16 @@ describe("The Stack Page", () => {
 
     it("delete", () => {
       for (let i = 0; i < 4; i++) {
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').click();
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).click();
       }
       for (let i = 3; i >= 0; i--) {
-        cy.get('[data-cy="deleteButton"]').click();
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.deleteButton).click();
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorChanged);
-        cy.get('[data-cy="head"]')
+        cy.get(Selectors.head)
           .eq(i - 1)
           .should("have.text", `top`);
       }
@@ -56,12 +58,12 @@ describe("The Stack Page", () => {
 
     it("clear", () => {
       for (let i = 0; i < 4; i++) {
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').click();
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).click();
       }
 
-      cy.get('[data-cy="clearButton"]').click();
-      cy.get('[data-cy="letter"]').should("not.exist");
+      cy.get(Selectors.clearButton).click();
+      cy.get(Selectors.letter).should("not.exist");
     });
   });
 });

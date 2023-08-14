@@ -53,7 +53,7 @@ describe("The Stack Page", () => {
       }
 
       for (let i = 0; i < 7; i++) {
-        cy.get('[data-cy="deleteButton"]').click();
+        cy.get(Selectors.deleteButton).click();
         cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
@@ -82,7 +82,7 @@ describe("The Stack Page", () => {
         cy.get(Selectors.button).should("be.enabled").click();
       }
 
-      cy.get('[data-cy="clearButton"]').click();
+      cy.get(Selectors.clearButton).click();
 
       for (let i = 0; i < 7; i++) {
         cy.get(Selectors.letter).eq(i).should("have.text", "");
