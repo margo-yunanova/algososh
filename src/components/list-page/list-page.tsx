@@ -73,6 +73,7 @@ export const ListPage: React.FC = () => {
         isSmall={true}
         letter={inputValue}
         state={ElementStates.Changing}
+        extraClass="smallCircle"
       />
     );
 
@@ -108,7 +109,11 @@ export const ListPage: React.FC = () => {
     <SolutionLayout title="Связный список">
       <Container padding={"queuePage"}>
         <div className={styles.forms}>
-          <form className={styles.form} onSubmit={submitPrepend}>
+          <form
+            className={styles.form}
+            onSubmit={submitPrepend}
+            data-cy="formValue"
+          >
             <Input
               extraClass={styles.input}
               placeholder="Введите значение"
@@ -119,6 +124,7 @@ export const ListPage: React.FC = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setInputValue(e.target.value);
               }}
+              data-cy="inputValue"
             />
             <Button
               text="Добавить в head"
@@ -126,6 +132,7 @@ export const ListPage: React.FC = () => {
               disabled={inputValue === "" || currentAnimation !== null}
               linkedList="small"
               isLoader={currentAnimation === "prepend"}
+              data-cy="addButtonHead"
             />
             <Button
               text="Добавить в tail"
@@ -154,6 +161,7 @@ export const ListPage: React.FC = () => {
                 setInputValue("");
                 setCurrentAnimation(null);
               }}
+              data-cy="addButtonTail"
             />
             <Button
               text="Удалить из head"
@@ -172,6 +180,7 @@ export const ListPage: React.FC = () => {
                     isSmall={true}
                     letter={[...linkedList][0]}
                     state={ElementStates.Changing}
+                    extraClass="smallCircle"
                   />
                 );
                 await delay(SHORT_DELAY_IN_MS);
@@ -181,6 +190,7 @@ export const ListPage: React.FC = () => {
                 setDataForVisualization([...linkedList]);
                 setCurrentAnimation(null);
               }}
+              data-cy="deleteButtonHead"
             />
             <Button
               text="Удалить из tail"
@@ -199,6 +209,7 @@ export const ListPage: React.FC = () => {
                     isSmall={true}
                     letter={[...linkedList].at(-1)}
                     state={ElementStates.Changing}
+                    extraClass="smallCircle"
                   />
                 );
                 await delay(SHORT_DELAY_IN_MS);
@@ -208,9 +219,14 @@ export const ListPage: React.FC = () => {
                 setDataForVisualization([...linkedList]);
                 setCurrentAnimation(null);
               }}
+              data-cy="deleteButtonTail"
             />
           </form>
-          <form className={styles.form} onSubmit={submitAddByIndex}>
+          <form
+            className={styles.form}
+            onSubmit={submitAddByIndex}
+            data-cy="formIndex"
+          >
             <Input
               extraClass={styles.input}
               placeholder="Введите индекс"
@@ -220,6 +236,7 @@ export const ListPage: React.FC = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setInputIndex(+e.target.value); //TODO контролируемый инпут
               }}
+              data-cy="inputIndex"
             />
             <Button
               text="Добавить по индексу"
@@ -232,6 +249,7 @@ export const ListPage: React.FC = () => {
               }
               isLoader={currentAnimation === "addByIndex"}
               linkedList="big"
+              data-cy="addButtonIndex"
             />
             <Button
               text="Удалить по индексу"
@@ -262,6 +280,7 @@ export const ListPage: React.FC = () => {
                     isSmall={true}
                     letter={letter}
                     state={ElementStates.Changing}
+                    extraClass="smallCircle"
                   />
                 );
                 await delay(SHORT_DELAY_IN_MS);
@@ -272,12 +291,13 @@ export const ListPage: React.FC = () => {
                 setDeleteByIndex(false);
                 setCurrentAnimation(null);
               }}
+              data-cy="deleteButtonIndex"
             />
           </form>
         </div>
-        <div className={styles.circle}>
+        <div className={styles.circle} data-cy="circles">
           {dataForVisualization.map((value, index) => (
-            <div key={index} className={styles.circleBlock}>
+            <div key={index} className={styles.circleBlock} data-cy="circle">
               <Circle
                 letter={value.toString()}
                 index={index}
@@ -290,6 +310,7 @@ export const ListPage: React.FC = () => {
                     : null
                 }
                 state={getState(index)}
+                extraClass="bigCircle"
               />
               {lastIndexDataForVisualization !== index && <ArrowIcon />}
             </div>

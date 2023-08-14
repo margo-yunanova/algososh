@@ -11,6 +11,10 @@ export enum Selectors {
   inputIndex = '[data-cy="inputIndex"]',
   button = '[data-cy="button"]',
   formValue = '[data-cy="formValue"]',
+  addButtonHead = '[data-cy="addButtonHead"]',
+  addButtonTail = '[data-cy="addButtonTail"]',
+  addButtonIndex = '[data-cy="addButtonIndex"]',
+  deleteButtonIndex = '[data-cy="deleteButtonIndex"]',
 }
 
 export enum Colors {
