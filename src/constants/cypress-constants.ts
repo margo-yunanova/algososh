@@ -1,6 +1,6 @@
 export enum Selectors {
   letter = '[data-cy="letter"]',
-  state = '[data-cy="styleCircle"]',
+  state = '[data-cy="circleStyle"]',
   head = '[data-cy="head"]',
   tail = '[data-cy="tail"]',
   circle = '[data-cy="circle"]',
