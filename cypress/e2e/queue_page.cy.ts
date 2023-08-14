@@ -1,3 +1,6 @@
+import { Selectors } from "../../src/constants/cypress-constants";
+import { HEAD, TAIL } from "../../src/constants/element-captions";
+
 describe("The Stack Page", () => {
   const colorDefault = "rgb(0, 50, 255)";
   const colorChanged = "rgb(210, 82, 225)";
@@ -9,10 +12,10 @@ describe("The Stack Page", () => {
   });
 
   it("add button is disabled", () => {
-    cy.get('[data-cy="form"]').within(() => {
-      cy.get('[data-cy="input"]')
+    cy.get(Selectors.formValue).within(() => {
+      cy.get(Selectors.inputValue)
         .should("be.empty")
-        .get('[data-cy="addButton"]')
+        .get(Selectors.button)
         .should("be.disabled");
     });
   });
@@ -20,22 +23,22 @@ describe("The Stack Page", () => {
   describe("with data", () => {
     it("add", () => {
       for (let i = 0; i < 7; i++) {
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorDefault);
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').should("be.enabled");
-        cy.get('[data-cy="addButton"]').click();
-        cy.get('[data-cy="head"]').eq(0).should("have.text", `head`);
-        cy.get('[data-cy="tail"]').eq(i).should("have.text", `tail`);
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).should("be.enabled");
+        cy.get(Selectors.button).click();
+        cy.get(Selectors.head).eq(0).should("have.text", HEAD);
+        cy.get(Selectors.tail).eq(i).should("have.text", TAIL);
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorChanged);
-        cy.get('[data-cy="letter"]').eq(i).should("have.text", `${i}`);
+        cy.get(Selectors.letter).eq(i).should("have.text", `${i}`);
 
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorDefault);
@@ -44,28 +47,28 @@ describe("The Stack Page", () => {
 
     it("delete", () => {
       for (let i = 0; i < 7; i++) {
-        cy.get('[data-cy="addButton"]').should("be.disabled");
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').should("be.enabled").click();
+        cy.get(Selectors.button).should("be.disabled");
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).should("be.enabled").click();
       }
 
       for (let i = 0; i < 7; i++) {
         cy.get('[data-cy="deleteButton"]').click();
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorChanged);
-        cy.get('[data-cy="letter"]').eq(i).should("have.text", "");
+        cy.get(Selectors.letter).eq(i).should("have.text", "");
         if (i < 6) {
-          cy.get('[data-cy="head"]')
+          cy.get(Selectors.head)
             .eq(i + 1)
             .should("have.text", `head`);
-          cy.get('[data-cy="tail"]').eq(6).should("have.text", `tail`);
+          cy.get(Selectors.tail).eq(6).should("have.text", TAIL);
         } else {
-          cy.get('[data-cy="head"]').eq(6).should("have.text", ``);
-          cy.get('[data-cy="tail"]').eq(6).should("have.text", ``);
+          cy.get(Selectors.head).eq(6).should("have.text", ``);
+          cy.get(Selectors.tail).eq(6).should("have.text", ``);
         }
-        cy.get('[data-cy="state"]')
+        cy.get(Selectors.state)
           .eq(i)
           .should("have.css", "border-color")
           .should("equal", colorDefault);
@@ -74,15 +77,15 @@ describe("The Stack Page", () => {
 
     it("clear", () => {
       for (let i = 0; i < 7; i++) {
-        cy.get('[data-cy="addButton"]').should("be.disabled");
-        cy.get('[data-cy="input"]').type(`${i}`);
-        cy.get('[data-cy="addButton"]').should("be.enabled").click();
+        cy.get(Selectors.button).should("be.disabled");
+        cy.get(Selectors.inputValue).type(`${i}`);
+        cy.get(Selectors.button).should("be.enabled").click();
       }
 
       cy.get('[data-cy="clearButton"]').click();
 
       for (let i = 0; i < 7; i++) {
-        cy.get('[data-cy="letter"]').eq(i).should("have.text", "");
+        cy.get(Selectors.letter).eq(i).should("have.text", "");
       }
     });
   });
