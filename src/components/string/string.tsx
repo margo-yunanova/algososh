@@ -117,7 +117,11 @@ export const StringComponent: React.FC = () => {
   return (
     <SolutionLayout title="Строка">
       <Container padding="stringPage">
-        <form className={styles.form} onSubmit={submitHandler} data-cy="form">
+        <form
+          className={styles.form}
+          onSubmit={submitHandler}
+          data-cy="formValue"
+        >
           <Input
             maxLength={11}
             isLimitText={true}
@@ -126,7 +130,7 @@ export const StringComponent: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInputValue(e.target.value)
             }
-            data-cy="input"
+            data-cy="inputValue"
           />
           <Button
             text="Развернуть"
