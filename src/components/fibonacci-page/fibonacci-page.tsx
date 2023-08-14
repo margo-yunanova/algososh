@@ -69,7 +69,7 @@ export const FibonacciPage: React.FC = () => {
             data-cy="button"
           />
         </form>
-        <div className={styles.circle} data-cy="fibonacci-page_circle">
+        <div className={styles.circle}>
           {dataForVisualization &&
             dataForVisualization.map((value, index) => (
               <Circle letter={value.toString()} key={index} index={index} />

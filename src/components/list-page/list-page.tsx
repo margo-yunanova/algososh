@@ -295,7 +295,7 @@ export const ListPage: React.FC = () => {
             />
           </form>
         </div>
-        <div className={styles.circle} data-cy="circles">
+        <div className={styles.circle}>
           {dataForVisualization.map((value, index) => (
             <div key={index} className={styles.circleBlock} data-cy="circle">
               <Circle
