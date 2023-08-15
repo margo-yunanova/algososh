@@ -1,4 +1,4 @@
-interface IStack<T> {
+export interface IStack<T> {
   peek: () => T | undefined;
   push: (item: T) => number;
   pop: () => T | undefined;

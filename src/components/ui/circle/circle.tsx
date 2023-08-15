@@ -30,6 +30,7 @@ export const Circle: React.FC<CircleProps> = ({
         } ${styles.head} ${
           styles[typeof head === "string" ? "string" : "element"]
         }`}
+        data-cy="head"
       >
         {head}
       </div>
@@ -37,9 +38,11 @@ export const Circle: React.FC<CircleProps> = ({
         className={`${styles.circle}  ${isSmall ? styles.small : ""} ${
           styles[state]
         }`}
+        data-cy="circleStyle"
       >
         <p
           className={`text text_type_circle text_color_input ${styles.letter}`}
+          data-cy="letter"
         >
           {letter}
         </p>
@@ -55,6 +58,7 @@ export const Circle: React.FC<CircleProps> = ({
         } ${index?.toString() ? styles.tail60 : styles.tail30} ${
           styles[typeof tail === "string" ? "string" : "element"]
         }`}
+        data-cy="tail"
       >
         {tail}
       </div>

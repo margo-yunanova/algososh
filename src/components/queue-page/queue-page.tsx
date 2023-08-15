@@ -33,7 +33,11 @@ export const QueuePage: React.FC = () => {
   return (
     <SolutionLayout title="Очередь">
       <Container padding={"queuePage"}>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form
+          className={styles.form}
+          onSubmit={submitHandler}
+          data-cy="formValue"
+        >
           <Input
             maxLength={4}
             value={inputValue}
@@ -42,11 +46,13 @@ export const QueuePage: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInputValue(e.target.value);
             }}
+            data-cy="inputValue"
           />
           <Button
             text="Добавить"
             type="submit"
             disabled={inputValue === "" || queue.length === 7}
+            data-cy="button"
           />
           <Button
             text="Удалить"
@@ -59,6 +65,7 @@ export const QueuePage: React.FC = () => {
               setDataForVisualization([...queue]);
               setModifiedItem(null);
             }}
+            data-cy="deleteButton"
           />
           <Button
             text="Очистить"
@@ -68,6 +75,7 @@ export const QueuePage: React.FC = () => {
               queue.clear();
               setDataForVisualization([...queue]);
             }}
+            data-cy="clearButton"
           />
         </form>
         <div className={styles.circle}>

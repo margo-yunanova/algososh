@@ -8,25 +8,25 @@ import { Circle } from "../ui/circle/circle";
 import { delay } from "../../constants/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
+export const getFibonacciSequence = (number: number): Array<number> => {
+  let first = 0;
+  let second = 1;
+  const fibonacciSequence: Array<number> = [second];
+  for (let i = 0; i < number; i++) {
+    let third = first + second;
+    fibonacciSequence.push(third);
+    first = second;
+    second = third;
+  }
+  return fibonacciSequence;
+};
+
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(-1);
   const [dataForVisualization, setDataForVisualization] = useState<
     Array<number>
   >([]);
   const [isLoader, setLoader] = useState<boolean>(false);
-
-  const getFibonacciSequence = (number: number): Array<number> => {
-    let first = 0;
-    let second = 1;
-    const fibonacciSequence: Array<number> = [second];
-    for (let i = 0; i < number; i++) {
-      let third = first + second;
-      fibonacciSequence.push(third);
-      first = second;
-      second = third;
-    }
-    return fibonacciSequence;
-  };
 
   const submitHandler: FormEventHandler = async (e) => {
     e.preventDefault();
@@ -43,7 +43,11 @@ export const FibonacciPage: React.FC = () => {
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
       <Container padding={"fibonacciPage"}>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form
+          className={styles.form}
+          onSubmit={submitHandler}
+          data-cy="formValue"
+        >
           <Input
             placeholder="Введите текст"
             isLimitText={true}
@@ -55,12 +59,14 @@ export const FibonacciPage: React.FC = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInputValue(+e.target.value)
             }
+            data-cy="inputValue"
           />
           <Button
             text="Рассчитать"
             type="submit"
             isLoader={isLoader}
             disabled={inputValue <= 0 || inputValue > 19}
+            data-cy="button"
           />
         </form>
         <div className={styles.circle}>

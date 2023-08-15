@@ -1,4 +1,4 @@
-interface IQueue<T> {
+export interface IQueue<T> {
   peek: () => T;
   enqueue: (item: T) => void;
   dequeue: () => T;

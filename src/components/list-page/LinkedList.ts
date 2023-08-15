@@ -22,11 +22,11 @@ export class LinkedList<T> implements TLinkedList<T> {
   private size: number;
   head: LinkedListNode<T> | null;
 
-  constructor(array: Array<T> = []) {
+  constructor(initialData: Array<T> = []) {
     this.size = 0;
     this.head = null;
 
-    for (const item of array) {
+    for (const item of initialData) {
       this.append(item);
     }
   }
@@ -64,7 +64,7 @@ export class LinkedList<T> implements TLinkedList<T> {
 
   addByIndex(value: T, index: number) {
     if (index < 0 || index > this.size + 1) {
-      throw new Error("Хрен тебе");
+      throw new Error("The index is not correct");
     } else if (this.head === null || index === 0) {
       this.prepend(value);
     } else {
@@ -80,7 +80,7 @@ export class LinkedList<T> implements TLinkedList<T> {
 
   deleteByIndex(index: number) {
     if (index < 0 || index > this.size) {
-      throw new Error("Хрен тебе");
+      throw new Error("The index is not correct");
     } else if (this.head === null || index === 0) {
       this.deleteHead();
     } else {
@@ -99,7 +99,7 @@ export class LinkedList<T> implements TLinkedList<T> {
 
   deleteHead() {
     if (this.head === null) {
-      throw new Error("Список и так пустой");
+      throw new Error("No elements in the list");
     }
     this.head = this.head.next;
     this.size--;
@@ -107,7 +107,7 @@ export class LinkedList<T> implements TLinkedList<T> {
 
   deleteTail() {
     if (this.head === null) {
-      throw new Error("Список и так пустой");
+      throw new Error("No elements in the list");
     } else if (this.head.next === null) {
       this.head = null;
     } else {
